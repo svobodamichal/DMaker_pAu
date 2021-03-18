@@ -40,8 +40,8 @@ void runPicoD0AnaMaker(
 
     hfCuts->setBadRunListFileName(badRunListFileName);
     hfCuts->addTriggerId(500206); //VPD-5
-    hfCuts->setCutPrimaryDCAtoVtxMax(10);
-    hfCuts->setCutVzMax(6);
+    hfCuts->setCutPrimaryDCAtoVtxMax(1.5);
+    hfCuts->setCutVzMax(30.);
     hfCuts->setCutVzVpdVzMax(6.);
     hfCuts->setCutNHitsFitMin(15);
     hfCuts->setCutRequireHFT(false);
@@ -57,30 +57,29 @@ void runPicoD0AnaMaker(
     hfCuts->setCutDcaMin(0.002,StHFCuts::kPion);
     hfCuts->setCutDcaMin(0.002,StHFCuts::kKaon);
 
-    float dcaDaughtersMax = 10;  // maximum toto ide
+ /*   float dcaDaughtersMax = 10;  // maximum toto ide
     float decayLengthMin  = 0.00001; // minimum
     float decayLengthMax  = 999;  //std::numeric_limits<float>::max(); toto ide (cutuje)
     float cosThetaMin     = 0;   // minimum
-//    float minMass         = 0.4;
-    float minMass         = 1.7;
-    float maxMass         = 2.;
-    float pairDcaMax      = 99.9;
+    float minMass         = 0.4;
+    float maxMass         = 2.4;
+    float pairDcaMax      = 99.9;*/
 
-//    hfCuts->setCutDcaMin(0.004,StHFCuts::kPion);
-//    hfCuts->setCutDcaMin(0.004,StHFCuts::kKaon);
+    hfCuts->setCutDcaMin(1.5,StHFCuts::kPion);
+    hfCuts->setCutDcaMin(1.5,StHFCuts::kKaon);
 //
-//    float dcaDaughtersMax = 0.04;  // maximum toto ide
-//    float decayLengthMin  = 0.009; // minimum
-//    float decayLengthMax  = 999;  //std::numeric_limits<float>::max(); toto ide (cutuje)
-//    float cosThetaMin     = 0.5;   // minimum
-//    float minMass         = 0.4;
-//    float maxMass         = 2.4;
+    float dcaDaughtersMax = 0.5;  // maximum toto ide
+    float decayLengthMin  = 0.009; // minimum
+    float decayLengthMax  = 999;  //std::numeric_limits<float>::max(); toto ide (cutuje)
+    float cosThetaMin     = 0.5;   // minimum
+    float minMass         = 1.7;
+    float maxMass         = 2.0;
 
-    hfCuts->setCutSecondaryPair(dcaDaughtersMax, decayLengthMin, decayLengthMax, cosThetaMin, minMass, maxMass, pairDcaMax);
+ //   hfCuts->setCutSecondaryPair(dcaDaughtersMax, decayLengthMin, decayLengthMax, cosThetaMin, minMass, maxMass, pairDcaMax);
 
-    hfCuts->setCutSecondaryPairPtBin(1,      2,              0.007,          0.012,         0.5,      0.005,    0.009, 0.007);
+/*    hfCuts->setCutSecondaryPairPtBin(1,      2,              0.007,          0.012,         0.5,      0.005,    0.009, 0.007);
     hfCuts->setCutSecondaryPairPtBin(2,      3,              0.016,          0.003,         0.5,      0.0065,   0.009, 0.01);
-    hfCuts->setCutSecondaryPairPtBin(3,      5,              0.015,          0.009,         0.6,      0.0064,   0.0064, 0.0076);
+    hfCuts->setCutSecondaryPairPtBin(3,      5,              0.015,          0.009,         0.6,      0.0064,   0.0064, 0.0076);*/
 
     StPicoDstMaker* picoDstMaker = new StPicoDstMaker(static_cast<StPicoDstMaker::PicoIoMode>(StPicoDstMaker::IoRead), inputFile, "picoDstMaker");
     StPicoD0AnaMaker* PicoD0AnaMaker = new StPicoD0AnaMaker("picoD0AnaMaker", picoDstMaker, outputFile);
