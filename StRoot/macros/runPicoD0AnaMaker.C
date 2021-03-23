@@ -72,8 +72,8 @@ void runPicoD0AnaMaker(
     float decayLengthMin  = 0.009; // minimum
     float decayLengthMax  = 999;  //std::numeric_limits<float>::max(); toto ide (cutuje)
     float cosThetaMin     = 0.5;   // minimum
-    float minMass         = 0.4;
-    float maxMass         = 2.2;
+    float minMass         = 1.7;
+    float maxMass         = 2.0;
 
     hfCuts->setCutSecondaryPair(dcaDaughtersMax, decayLengthMin, decayLengthMax, cosThetaMin, minMass, maxMass, pairDcaMax);
 
