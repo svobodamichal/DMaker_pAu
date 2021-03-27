@@ -74,6 +74,7 @@ void runPicoD0AnaMaker(
     float cosThetaMin     = 0.5;   // minimum
     float minMass         = 1.7;
     float maxMass         = 2.0;
+    float pairDcaMax      = 99.9;
 
     hfCuts->setCutSecondaryPair(dcaDaughtersMax, decayLengthMin, decayLengthMax, cosThetaMin, minMass, maxMass, pairDcaMax);
 
