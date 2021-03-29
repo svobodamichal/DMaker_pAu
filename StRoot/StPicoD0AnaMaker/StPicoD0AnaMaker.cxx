@@ -218,7 +218,7 @@ int StPicoD0AnaMaker::MakeHF() {
 // _________________________________________________________
 int StPicoD0AnaMaker::createCandidates() {
     //make it run faster:
-    if (!(mPicoEvent->BBCx()<950000)) return kStOK;
+ //   if (!(mPicoEvent->BBCx()<950000)) return kStOK;
     nGoodTracks=0;
 //    if (!(abs(mPrimVtx.x())<0.6)) return kStOK;
 //    if (!(abs(mPrimVtx.y())<0.6)) return kStOK;

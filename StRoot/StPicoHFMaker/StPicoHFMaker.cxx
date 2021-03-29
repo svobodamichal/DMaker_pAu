@@ -187,17 +187,17 @@ void StPicoHFMaker::fillEventStats(int *aEventStat) {
   // -- Fill event statistics 
 
   TH1F *hEventStat0 = static_cast<TH1F*>(mOutList->FindObject("hEventStat0"));
-//  TH1F *hEventStat1 = static_cast<TH1F*>(mOutList->FindObject("hEventStat1"));
+  TH1F *hEventStat1 = static_cast<TH1F*>(mOutList->FindObject("hEventStat1"));
 
   for (unsigned int idx = 0; idx < mHFCuts->eventStatMax() ; ++idx) {
     if (!aEventStat[idx])
       hEventStat0->Fill(idx);
   }
 
-//  for (unsigned int idx = 0; idx < mHFCuts->eventStatMax(); ++idx) {
-//    if (aEventStat[idx])
-//      break;
-//    hEventStat1->Fill(idx);
-//  }
+  for (unsigned int idx = 0; idx < mHFCuts->eventStatMax(); ++idx) {
+    if (aEventStat[idx])
+      break;
+    hEventStat1->Fill(idx);
+  }
 }
 
