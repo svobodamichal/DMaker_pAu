@@ -63,13 +63,13 @@ void runPicoD0AnaMakerLocal(
   //hfCuts->setCutNHitsFitnHitsMax(0.52);  kvapil
 
    // kaonPion pair cuts
-  float dcaDaughtersMax = 0.2;  // maximum
-  float decayLengthMin  = 0.000; // minimum
-  float decayLengthMax  = 999999; //std::numeric_limits<float>::max();
-  float cosThetaMin     = -20.;   // minimum
-  float minMass         = 0.6;
-  float maxMass         = 2.6;
-  float pairDcaMax      = 99.9;
+    float dcaDaughtersMax = 0.5;  // maximum toto ide
+    float decayLengthMin  = 0.009; // minimum
+    float decayLengthMax  = 999;  //std::numeric_limits<float>::max(); toto ide (cutuje)
+    float cosThetaMin     = 0.5;   // minimum
+    float minMass         = 1.7;
+    float maxMass         = 2.0;
+    float pairDcaMax      = 99.9;
 
   hfCuts->setCutSecondaryPair(dcaDaughtersMax, decayLengthMin, decayLengthMax, cosThetaMin, minMass, maxMass, pairDcaMax);
  
