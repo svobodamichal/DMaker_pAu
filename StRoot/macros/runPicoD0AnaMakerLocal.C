@@ -49,13 +49,29 @@ void runPicoD0AnaMakerLocal(
    hfCuts->setBadRunListFileName(badRunListFileName); 
 
   hfCuts->setCutVzMax(6.);
-  hfCuts->setCutVzVpdVzMax(6.);
-  hfCuts->addTriggerId(530003); //VPD-5
+  hfCuts->addTriggerId(500206); //VPD-5
 
-  hfCuts->setCutNHitsFitMin(15); //default is 20
-  hfCuts->setCutRequireHFT(true);
-  hfCuts->setHybridTof(true);
-  hfCuts->setCheckHotSpot(false);
+
+    hfCuts->setCutPrimaryDCAtoVtxMax(1.5);
+    hfCuts->setCutVzMax(30.);
+    hfCuts->setCutVzVpdVzMax(6.);
+    hfCuts->setCutNHitsFitMin(15);
+    hfCuts->setCutRequireHFT(false);
+    hfCuts->setHybridTof(true);
+    hfCuts->setCheckHotSpot(false);
+
+    hfCuts->setCutTPCNSigmaPion(3.0);
+    hfCuts->setCutTPCNSigmaKaon(2.0);
+    hfCuts->setCutTOFDeltaOneOverBetaKaon(0.03);
+    hfCuts->setCutTOFDeltaOneOverBetaPion(0.03);
+    hfCuts->setCutPtMin(0.15);
+
+    hfCuts->setCutDcaMin(0.002,StHFCuts::kPion);
+    hfCuts->setCutDcaMin(0.002,StHFCuts::kKaon);
+
+
+    hfCuts->setCutDcaMin(1.5,StHFCuts::kPion);
+    hfCuts->setCutDcaMin(1.5,StHFCuts::kKaon);
 
 
     //LK hfCuts->setCutDcaMin(0.009,StHFCuts::kPion); //federic 1aug2016
@@ -74,7 +90,7 @@ void runPicoD0AnaMakerLocal(
   hfCuts->setCutSecondaryPair(dcaDaughtersMax, decayLengthMin, decayLengthMax, cosThetaMin, minMass, maxMass, pairDcaMax);
  
   //Single track pt
-  hfCuts->setCutPtRange(0.15,50.0,StHFCuts::kPion); //0.2 , 50.0
+ /* hfCuts->setCutPtRange(0.15,50.0,StHFCuts::kPion); //0.2 , 50.0
   hfCuts->setCutPtRange(0.15,50.0,StHFCuts::kKaon); //0.2, 50.0
   //TPC setters
   hfCuts->setCutTPCNSigmaPion(3.0); //3
@@ -83,12 +99,12 @@ void runPicoD0AnaMakerLocal(
   hfCuts->setCutTOFDeltaOneOverBeta(0.06, StHFCuts::kKaon); // v podstate 5 sigma; nastavene = f * (sigmaTOF), sigma TOF je 0.013
   hfCuts->setCutPtotRangeHybridTOF(0.2,50.0,StHFCuts::kKaon);
   hfCuts->setCutTOFDeltaOneOverBeta(0.06, StHFCuts::kPion); // v podstate 6 sigma
-  hfCuts->setCutPtotRangeHybridTOF(0.2,50.0,StHFCuts::kPion);
+  hfCuts->setCutPtotRangeHybridTOF(0.2,50.0,StHFCuts::kPion);*/
 
   //                               ptmin, ptmax, dcaDaughtersMax, decayLengthMin,  cosThetaMin, pairDcaMax, pionDca, kaonDca
-  hfCuts->setCutSecondaryPairPtBin(1,      2,              0.007,          0.012,         0.5,      0.005,    0.009, 0.007);
+ /* hfCuts->setCutSecondaryPairPtBin(1,      2,              0.007,          0.012,         0.5,      0.005,    0.009, 0.007);
   hfCuts->setCutSecondaryPairPtBin(2,      3,              0.016,          0.003,         0.5,      0.0065,   0.009, 0.01);
-  hfCuts->setCutSecondaryPairPtBin(3,      5,              0.015,          0.009,         0.6,      0.0064,   0.0064, 0.0076);
+  hfCuts->setCutSecondaryPairPtBin(3,      5,              0.015,          0.009,         0.6,      0.0064,   0.0064, 0.0076);*/
 
 
   StPicoDstMaker* picoDstMaker = new StPicoDstMaker(static_cast<StPicoDstMaker::PicoIoMode>(StPicoDstMaker::IoRead), inputFile, "picoDstMaker");

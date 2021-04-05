@@ -40,6 +40,8 @@ void runPicoD0AnaMaker(
 
     hfCuts->setBadRunListFileName(badRunListFileName);
     hfCuts->addTriggerId(500206); //VPD-5
+
+
     hfCuts->setCutPrimaryDCAtoVtxMax(1.5);
     hfCuts->setCutVzMax(30.);
     hfCuts->setCutVzVpdVzMax(6.);
@@ -57,13 +59,6 @@ void runPicoD0AnaMaker(
     hfCuts->setCutDcaMin(0.002,StHFCuts::kPion);
     hfCuts->setCutDcaMin(0.002,StHFCuts::kKaon);
 
- /*   float dcaDaughtersMax = 10;  // maximum toto ide
-    float decayLengthMin  = 0.00001; // minimum
-    float decayLengthMax  = 999;  //std::numeric_limits<float>::max(); toto ide (cutuje)
-    float cosThetaMin     = 0;   // minimum
-    float minMass         = 0.4;
-    float maxMass         = 2.4;
-    float pairDcaMax      = 99.9;*/
 
     hfCuts->setCutDcaMin(1.5,StHFCuts::kPion);
     hfCuts->setCutDcaMin(1.5,StHFCuts::kKaon);
