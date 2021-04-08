@@ -42,7 +42,7 @@ void runPicoVertexLocal(
 
   StHFCuts* hfCuts = new StHFCuts("hfBaseCuts");
   hfCuts->setBadRunListFileName(badRunListFileName);
-  hfCuts->addTriggerId(530003); //VPD-5
+  hfCuts->addTriggerId(500206); //VPD-5
   hfCuts->setCutVzMax(6);
   hfCuts->setCutVzVpdVzMax(6.);
 

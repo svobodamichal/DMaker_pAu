@@ -45,7 +45,7 @@ void runPicoPhiAnaMakerLocal(
 
   hfCuts->setCutVzMax(6.);
   hfCuts->setCutVzVpdVzMax(3.);
-  hfCuts->addTriggerId(530003); //VPD-5
+  hfCuts->addTriggerId(500206); //VPD-5
 
   hfCuts->setCutNHitsFitMin(15); //default is 20
   hfCuts->setCutRequireHFT(true);

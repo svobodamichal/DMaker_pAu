@@ -37,7 +37,7 @@ void runQAAnaMaker(
     StHFCuts* hfCuts = new StHFCuts("hfBaseCuts");
 
     hfCuts->setBadRunListFileName(badRunListFileName);
-    hfCuts->addTriggerId(530003); //VPD-5
+    hfCuts->addTriggerId(500206); //VPD-5
     hfCuts->setCheckHotSpot(true);
     //    hfCuts->addTriggerId(2); //ZDC-VPD-5
 //    hfCuts->addTriggerId(3); //VPD-5
