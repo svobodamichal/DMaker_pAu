@@ -246,10 +246,8 @@ int StPicoD0AnaMaker::createCandidates() {
     for (unsigned short iTrack = 0; iTrack < nTracks; ++iTrack) {
         StPicoTrack* trk = mPicoDst->track(iTrack);
         if (abs(trk->gMom().PseudoRapidity())>1) continue;
-        cout<<"test trck pred"<<endl;
 
         if (trk->isPrimary()) {
-            cout<<"test trck po"<<endl;
 
             nPrimary++;
             primaryTracks.push_back(iTrack);
