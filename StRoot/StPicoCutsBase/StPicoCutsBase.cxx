@@ -219,24 +219,12 @@ bool StPicoCutsBase::isGoodTrack(StPicoTrack const * const trk) const {
 
 // _________________________________________________________
 bool StPicoCutsBase::isGoodPion(StPicoTrack const *const trk) const {
-
     if (!isGoodTrack(trk)) return false;
-
     if (!cutMinDcaToPrimVertex(trk, StPicoCutsBase::kPion)) return false;
-    cout<<"pokus 3"<<endl;
-
     if (!isTPCPion(trk)) return false;
-    cout<<"pokus 4"<<endl;
-
-
     bool tof = false;
-    cout<<"pokus 5"<<endl;
-
     if (mHybridTof) tof = isHybridTOFPion(trk);
-    cout<<"pokus 6"<<endl;
-
     if (!mHybridTof) tof = isTOFmatched(trk);
-    cout<<"pokus 7"<<endl;
 
     return tof;
 }

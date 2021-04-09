@@ -98,7 +98,6 @@ int StPicoD0AnaMaker::InitHF() {
     if (mSwitchRefit) {
         TString dir = "./StRoot/weights/";
         TString prefix = "TMVAClassification";
-        cout<<"test 1"<<endl;
 
         for (int pT = 0; pT < nptBins; pT++) {
             reader[pT] = new TMVA::Reader("!Color:!Silent");
@@ -109,7 +108,6 @@ int StPicoD0AnaMaker::InitHF() {
             reader[pT]->AddVariable("D_decayL", &D_decayL[pT]);
             reader[pT]->AddVariable("dcaD0ToPv", &dcaD0ToPv[pT]);
 //            reader[pT]->AddVariable("D_cosThetaStar", &thetaStar[pT]);
-            cout<<"test 2"<<endl;
 
             TString methodName = "BDT method";
             TString weightfile = dir + prefix + TString("_BDT.weights.pt") + ptbin[pT] + TString(".xml");
@@ -238,7 +236,6 @@ int StPicoD0AnaMaker::createCandidates() {
     TH1F *hNTracksGoodToFit = static_cast<TH1F*>(mOutList->FindObject("hNTracksGoodToFit"));
 
     UInt_t nTracks = mPicoDst->numberOfTracks();
-    cout << " Total tracks = " << nTracks << endl;
 
     Int_t nD0 = 0;
     nPrimary = 0;
@@ -251,19 +248,16 @@ int StPicoD0AnaMaker::createCandidates() {
 
             nPrimary++;
             primaryTracks.push_back(iTrack);
-            cout<<"test trck popo"<<endl;
 
 
             if (mHFCuts->isGoodPion(trk)) {
                 mIdxPicoPions.push_back(iTrack);
                 hPionPt->Fill(trk->gPt());
-                cout<<"test pion"<<endl;
 
             }
             if (mHFCuts->isGoodKaon(trk)){
                 mIdxPicoKaons.push_back(iTrack);
                 hKaonPt->Fill(trk->gPt());
-                cout<<"test kaon"<<endl;
 
             }
         }
@@ -282,7 +276,6 @@ int StPicoD0AnaMaker::createCandidates() {
         for (unsigned short idxKaon = 0; idxKaon < mIdxPicoKaons.size(); ++idxKaon) {
             StPicoTrack *kaon = mPicoDst->track(mIdxPicoKaons[idxKaon]);
             StHFPair *pair = new StHFPair(pion1, kaon, mHFCuts->getHypotheticalMass(StPicoCutsBase::kPion),mHFCuts->getHypotheticalMass(StPicoCutsBase::kKaon), mIdxPicoPions[idxPion1],mIdxPicoKaons[idxKaon], useVertex, mBField, kTRUE);
-            cout<<"test 4"<<endl;
 
             if (!mHFCuts->isGoodSecondaryVertexPair(pair)) continue;
 
@@ -300,7 +293,6 @@ int StPicoD0AnaMaker::createCandidates() {
             const int nNtVars = ntp_DMeson_Signal->GetNvar();
             float ntVar[nNtVars];
             int ii=0;
-            cout<<"test 5"<<endl;
 
             ntVar[ii++] = mPicoEvent->grefMult();
             ntVar[ii++] = mPicoEvent->refMult();
