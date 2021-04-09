@@ -219,10 +219,8 @@ bool StPicoCutsBase::isGoodTrack(StPicoTrack const * const trk) const {
 
 // _________________________________________________________
 bool StPicoCutsBase::isGoodPion(StPicoTrack const *const trk) const {
-    cout<<"pokus 1"<<endl;
 
     if (!isGoodTrack(trk)) return false;
-    cout<<"pokus 2"<<endl;
 
     if (!cutMinDcaToPrimVertex(trk, StPicoCutsBase::kPion)) return false;
     cout<<"pokus 3"<<endl;
