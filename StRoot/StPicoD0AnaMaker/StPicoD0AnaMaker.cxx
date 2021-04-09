@@ -238,24 +238,35 @@ int StPicoD0AnaMaker::createCandidates() {
     TH1F *hNTracksGoodToFit = static_cast<TH1F*>(mOutList->FindObject("hNTracksGoodToFit"));
 
     UInt_t nTracks = mPicoDst->numberOfTracks();
+    cout << " Total tracks = " << nTracks << endl;
+
     Int_t nD0 = 0;
     nPrimary = 0;
 
     for (unsigned short iTrack = 0; iTrack < nTracks; ++iTrack) {
         StPicoTrack* trk = mPicoDst->track(iTrack);
         if (abs(trk->gMom().PseudoRapidity())>1) continue;
+        cout<<"test trck pred"<<endl;
 
         if (trk->isPrimary()) {
+            cout<<"test trck po"<<endl;
+
             nPrimary++;
             primaryTracks.push_back(iTrack);
+            cout<<"test trck popo"<<endl;
+
 
             if (mHFCuts->isGoodPion(trk)) {
                 mIdxPicoPions.push_back(iTrack);
                 hPionPt->Fill(trk->gPt());
+                cout<<"test pion"<<endl;
+
             }
             if (mHFCuts->isGoodKaon(trk)){
                 mIdxPicoKaons.push_back(iTrack);
                 hKaonPt->Fill(trk->gPt());
+                cout<<"test kaon"<<endl;
+
             }
         }
     }
