@@ -272,7 +272,6 @@ int StPicoD0AnaMaker::createCandidates() {
 
     for (unsigned short idxPion1 = 0; idxPion1 < mIdxPicoPions.size(); ++idxPion1) {
         StPicoTrack *pion1 = mPicoDst->track(mIdxPicoPions[idxPion1]);
-        cout<<"test 3"<<endl;
         for (unsigned short idxKaon = 0; idxKaon < mIdxPicoKaons.size(); ++idxKaon) {
             StPicoTrack *kaon = mPicoDst->track(mIdxPicoKaons[idxKaon]);
             StHFPair *pair = new StHFPair(pion1, kaon, mHFCuts->getHypotheticalMass(StPicoCutsBase::kPion),mHFCuts->getHypotheticalMass(StPicoCutsBase::kKaon), mIdxPicoPions[idxPion1],mIdxPicoKaons[idxKaon], useVertex, mBField, kTRUE);
