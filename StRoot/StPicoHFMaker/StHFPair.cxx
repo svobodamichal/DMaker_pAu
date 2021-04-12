@@ -83,7 +83,7 @@ StHFPair::StHFPair(StPicoTrack const * const particle1, StPicoTrack const * cons
 
   mLorentzVector = p1FourMom + p2FourMom;
 
-   -- calculate cosThetaStar
+ //  -- calculate cosThetaStar
   TLorentzVector pairFourMomReverse;
   pairFourMomReverse.SetPxPyPzE(-mLorentzVector.Px(), -mLorentzVector.Py(), -mLorentzVector.Pz(), mLorentzVector.E());
 
