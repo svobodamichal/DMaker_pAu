@@ -83,19 +83,19 @@ StHFPair::StHFPair(StPicoTrack const * const particle1, StPicoTrack const * cons
 
   mLorentzVector = p1FourMom + p2FourMom;
 
-  // -- calculate cosThetaStar
-//  TLorentzVector pairFourMomReverse;
-//  pairFourMomReverse.SetPxPyPzE(-mLorentzVector.Px(), -mLorentzVector.Py(), -mLorentzVector.Pz(), mLorentzVector.E());
-//
-//  TLorentzVector p1FourMomStar = p1FourMom;
-//  TLorentzVector p2FourMomStar = p2FourMom;
-//
-//  TVector3 beta = pairFourMomReverse.BoostVector();
-//  p1FourMomStar.Boost(beta);
-//  p2FourMomStar.Boost(beta);
-//  mCosThetaStar = cos(p1FourMomStar.Vect().Angle(mLorentzVector.Vect()));
+   -- calculate cosThetaStar
+  TLorentzVector pairFourMomReverse;
+  pairFourMomReverse.SetPxPyPzE(-mLorentzVector.Px(), -mLorentzVector.Py(), -mLorentzVector.Pz(), mLorentzVector.E());
 
-  mCosThetaStar = p2FourMom.Vect().Unit().Dot(mLorentzVector.Vect().Unit()); //same as in FastSim
+  TLorentzVector p1FourMomStar = p1FourMom;
+  TLorentzVector p2FourMomStar = p2FourMom;
+
+  TVector3 beta = pairFourMomReverse.BoostVector();
+  p1FourMomStar.Boost(beta);
+  p2FourMomStar.Boost(beta);
+  mCosThetaStar = cos(p2FourMomStar.Vect().Angle(mLorentzVector.Vect()));
+
+//  mCosThetaStar = p2FourMom.Vect().Unit().Dot(mLorentzVector.Vect().Unit()); //same as in FastSim
   if (mCosThetaStar!=mCosThetaStar) mCosThetaStar=-999;
 
   TVector3 const vtxToV0 = mDecayVertex - vtx;
