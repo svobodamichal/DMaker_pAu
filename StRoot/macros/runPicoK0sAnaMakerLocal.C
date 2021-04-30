@@ -54,7 +54,7 @@ void runPicoK0sAnaMakerLocal(
   hfCuts->setHybridTof(true);
   //LK hfCuts->setCutDcaMin(0.009,StHFCuts::kPion);
   //LK  hfCuts->setCutDcaMin(0.007,StHFCuts::kKaon);
-  //hfCuts->setCutNHitsFitnHitsMax(0.52);
+  hfCuts->setCutNHitsFitnHitsMax(0.52);
 
    // kaonPion pair cuts
   float dcaDaughtersMax = 0.5;  // maximum
