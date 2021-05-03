@@ -48,7 +48,7 @@ void runPicoD0AnaMaker(
     hfCuts->setCutNHitsFitMin(15);
     hfCuts->setCutNHitsFitnHitsMax(0.52);
     hfCuts->setCutRequireHFT(false);
-    hfCuts->setHybridTof(true);
+    hfCuts->setHybridTof(false);
     hfCuts->setCheckHotSpot(false);
 
     hfCuts->setCutTPCNSigmaPion(10.0);
