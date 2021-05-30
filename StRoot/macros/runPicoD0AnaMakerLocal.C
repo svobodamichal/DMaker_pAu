@@ -74,7 +74,7 @@ void runPicoD0AnaMakerLocal(
 
     //LK hfCuts->setCutDcaMin(0.009,StHFCuts::kPion); //federic 1aug2016
   //LK  hfCuts->setCutDcaMin(0.007,StHFCuts::kKaon); //federic 3aug2016
-  hfCuts->setCutNHitsFitnHitsMax(0.52);  kvapil
+  hfCuts->setCutNHitsFitnHitsMax(0.52);
 
    // kaonPion pair cuts
     float dcaDaughtersMax = 0.5;  // maximum toto ide
