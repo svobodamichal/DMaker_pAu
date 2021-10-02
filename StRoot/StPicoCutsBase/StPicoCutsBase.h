@@ -60,6 +60,7 @@ public:
     // -- TOF PID
     // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
     bool isTOFHadronPID(StPicoTrack const *trk, float const & tofBeta, int pidFlag) const;
+
     bool isTOFHadron(StPicoTrack const *trk, float const & tofBeta, int pidFlag) const;
     bool isHybridTOFHadron(StPicoTrack const *trk, float const & tofBeta, int pidFlag) const;
 
@@ -89,6 +90,18 @@ public:
     bool isHybridTOFPion(StPicoTrack const *trk,   float const & tofBeta) const;
     bool isHybridTOFKaon(StPicoTrack const *trk,   float const & tofBeta) const;
     bool isHybridTOFProton(StPicoTrack const *trk, float const & tofBeta) const;
+
+
+    // Comparing kaon parameters with functions and not constants
+
+    bool isTOFKaonCutOK(StPicoTrack const *trk, float const & tofBeta, int pidFlag) const;
+    bool isTOFBetterKaon(StPicoTrack const *trk, float const & tofBeta, int pidFlag) const;
+    bool isHybridTOFBetterKaon(StPicoTrack const *trk, float const & tofBeta, int pidFlag) const;
+    bool isTOFKaonBetterCuts(StPicoTrack const *trk) const;
+    bool isTOFKaonBetterCuts(StPicoTrack const *trk, float const & tofBeta, int pidFlag) const;
+    bool isHybridTOFKaonBetterCuts(StPicoTrack const *trk) const;
+    bool isHybridTOFKaonBetterCuts(StPicoTrack const *trk, float const & tofBeta, int pidFlag) const;
+
 
     // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
@@ -149,6 +162,8 @@ public:
 
     void setHybridTof(bool t);
 
+    void setHybridTofBetterBetaCuts(bool t);
+
     float tofPathLength(const TVector3* beginPoint, const TVector3* endPoint, float curvature) const;
 
     // -- calculate beta of track -- basic calculation
@@ -201,7 +216,8 @@ private:
     float mPrimaryDCAtoVtxMax;         // used for primary selection for TOF Beta recalculation
     float mPtMin;
     bool  mHybridTof;
-    bool mOnlyHotSpot;
+    bool  mHybridTofBetterBetaCuts;
+    bool  mOnlyHotSpot;
 
 
     // -- acceptance - per particle type [ePicoPID]
@@ -282,6 +298,9 @@ inline void StPicoCutsBase::setCutProtonPtotRangeTOF(float min, float max)      
 inline void StPicoCutsBase::setCutProtonPtotRangeHybridTOF(float min, float max) { setCutPtotRangeHybridTOF(min, max, StPicoCutsBase::kProton); }
 
 inline void StPicoCutsBase::setHybridTof(bool t) {mHybridTof = t;}
+inline void StPicoCutsBase::setHybridTofBetterBetaCuts(bool t) {mHybridTofBetterBetaCuts = t;}
+
+
 
 inline const float&    StPicoCutsBase::getHypotheticalMass(int pidFlag)        const { return mHypotheticalMass[pidFlag]; }
 
@@ -311,5 +330,13 @@ inline bool StPicoCutsBase::isHybridTOFProton(StPicoTrack const *trk) const { fl
 inline bool StPicoCutsBase::isHybridTOFPion(StPicoTrack const *trk,   float const & tofBeta) const { return isHybridTOFHadron(trk, tofBeta, StPicoCutsBase::kPion); }
 inline bool StPicoCutsBase::isHybridTOFKaon(StPicoTrack const *trk,   float const & tofBeta) const { return isHybridTOFHadron(trk, tofBeta, StPicoCutsBase::kKaon); }
 inline bool StPicoCutsBase::isHybridTOFProton(StPicoTrack const *trk, float const & tofBeta) const { return isHybridTOFHadron(trk, tofBeta, StPicoCutsBase::kProton); }
+
+inline bool StPicoCutsBase::isTOFKaonBetterCuts(StPicoTrack const *trk)   const { float tofBeta = getTofBeta(trk);
+    return isTOFBetterKaon(trk, tofBeta, StPicoCutsBase::kKaon); }
+inline bool StPicoCutsBase::isTOFKaonBetterCuts(StPicoTrack const *trk,   float const & tofBeta) const { return isTOFBetterKaon(trk, tofBeta, StPicoCutsBase::kKaon); }
+inline bool StPicoCutsBase::isHybridTOFKaonBetterCuts(StPicoTrack const *trk)   const { float tofBeta = getTofBeta(trk);
+    return isHybridTOFBetterKaon(trk, tofBeta, StPicoCutsBase::kKaon); }
+inline bool StPicoCutsBase::isHybridTOFKaonBetterCuts(StPicoTrack const *trk,   float const & tofBeta) const { return isHybridTOFBetterKaon(trk, tofBeta, StPicoCutsBase::kKaon); }
+
 
 #endif

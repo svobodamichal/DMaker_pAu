@@ -68,6 +68,7 @@ void runPicoD0AnaMakerLocal(
     hfCuts->setCutDcaMin(0.002,StHFCuts::kPion);
     hfCuts->setCutDcaMin(0.002,StHFCuts::kKaon);
 
+    hfCuts->setHybridTofBetterBetaCuts(true); // Turns on functional 1/beta cuts
 
 
 

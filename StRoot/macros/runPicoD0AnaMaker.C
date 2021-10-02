@@ -60,6 +60,9 @@ void runPicoD0AnaMaker(
     hfCuts->setCutDcaMin(0.002,StHFCuts::kPion);
     hfCuts->setCutDcaMin(0.002,StHFCuts::kKaon);
 
+    hfCuts->setHybridTofBetterBetaCuts(true); // Turns on functional 1/beta cuts
+
+
 //
     float dcaDaughtersMax = 0.5;  // maximum toto ide
     float decayLengthMin  = 0.009; // minimum
