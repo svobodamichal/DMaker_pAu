@@ -262,7 +262,7 @@ bool StPicoCutsBase::isTOFKaonCutOK(StPicoTrack const *trk, float const & tofBet
     float kaon_lower = -2*f_res + f_pos;
 
 
-    return ( fabs(1/tofBeta - 1/betaInv) < kaon_higher && fabs(1/tofBeta - 1/betaInv) > kaon_lower );
+    return ( fabs(1/tofBeta - 1/betaInv)/0.012 < kaon_higher && fabs(1/tofBeta - 1/betaInv)/0.012 > kaon_lower );
 }
 
 // _________________________________________________________

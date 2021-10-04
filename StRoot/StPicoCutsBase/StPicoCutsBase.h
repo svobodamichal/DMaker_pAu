@@ -98,9 +98,9 @@ public:
     bool isTOFBetterKaon(StPicoTrack const *trk, float const & tofBeta, int pidFlag) const;
     bool isHybridTOFBetterKaon(StPicoTrack const *trk, float const & tofBeta, int pidFlag) const;
     bool isTOFKaonBetterCuts(StPicoTrack const *trk) const;
-    bool isTOFKaonBetterCuts(StPicoTrack const *trk, float const & tofBeta, int pidFlag) const;
+    bool isTOFKaonBetterCuts(StPicoTrack const *trk, float const & tofBeta) const;
     bool isHybridTOFKaonBetterCuts(StPicoTrack const *trk) const;
-    bool isHybridTOFKaonBetterCuts(StPicoTrack const *trk, float const & tofBeta, int pidFlag) const;
+    bool isHybridTOFKaonBetterCuts(StPicoTrack const *trk, float const & tofBeta) const;
 
 
     // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
