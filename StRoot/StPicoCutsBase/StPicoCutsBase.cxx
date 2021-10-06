@@ -255,8 +255,8 @@ bool StPicoCutsBase::isTOFKaonCutOK(StPicoTrack const *trk, float const & tofBet
     double ptot    = trk->gPtot();
     float betaInv = ptot / sqrt(ptot*ptot + mHypotheticalMass2[pidFlag]);
 
-    float f_res = pow(0.929095+0.0779541/(ptot -0.113628),1.62916);  //sigma
-    float f_pos = pow(-0.0538389+0.0439373/(ptot -0.0651247),2.27704);  //mean
+    float f_res = 0.929095+0.0779541/pow((ptot -0.113628),1.62916);  //sigma
+    float f_pos = -0.0538389+0.0439373/pow((ptot -0.0651247),2.27704);  //mean
 
     float kaon_higher = 3*f_res + f_pos;
     float kaon_lower = -2*f_res + f_pos;
