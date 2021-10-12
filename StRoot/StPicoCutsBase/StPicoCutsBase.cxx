@@ -6,7 +6,7 @@
 
 #include "StPicoCutsBase.h"
 
-#include "StPicoEvent/StPicoPhysicalHelix.h"
+#include "StPicoEvent/StPicoPhysicalHelix.h"*.root
 #include "phys_constants.h"
 #include "SystemOfUnits.h"
 
@@ -262,7 +262,7 @@ bool StPicoCutsBase::isTOFKaonCutOK(StPicoTrack const *trk, float const & tofBet
     float kaon_lower = -2*f_res + f_pos;
 
 
-    return ( fabs(1/tofBeta - 1/betaInv)/0.012 < kaon_higher && fabs(1/tofBeta - 1/betaInv)/0.012 > kaon_lower );
+    return ( (1/tofBeta - 1/betaInv)/0.012 < kaon_higher && (1/tofBeta - 1/betaInv)/0.012 > kaon_lower );
 }
 
 // _________________________________________________________
