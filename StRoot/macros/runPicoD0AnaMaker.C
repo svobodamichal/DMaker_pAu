@@ -51,10 +51,10 @@ void runPicoD0AnaMaker(
     hfCuts->setHybridTof(true);
     hfCuts->setCheckHotSpot(false);
 
-    hfCuts->setCutTPCNSigmaPion(10.0);
-    hfCuts->setCutTPCNSigmaKaon(10.0);
-    hfCuts->setCutTOFDeltaOneOverBetaKaon(0.12);
-    hfCuts->setCutTOFDeltaOneOverBetaPion(0.12);
+    hfCuts->setCutTPCNSigmaPion(3.0);
+    hfCuts->setCutTPCNSigmaKaon(2.0);
+    hfCuts->setCutTOFDeltaOneOverBetaKaon(0.05);
+    hfCuts->setCutTOFDeltaOneOverBetaPion(0.05);
     hfCuts->setCutPtMin(0.15);
 
     hfCuts->setCutDcaMin(0.002,StHFCuts::kPion);
