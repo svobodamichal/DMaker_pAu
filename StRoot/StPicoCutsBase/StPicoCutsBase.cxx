@@ -223,11 +223,52 @@ bool StPicoCutsBase::isGoodPion(StPicoTrack const *const trk) const {
     if (!cutMinDcaToPrimVertex(trk, StPicoCutsBase::kPion)) return false;
     if (!isTPCPion(trk)) return false;
     bool tof = false;
-    if (mHybridTof) tof = isHybridTOFPion(trk);
-    if (!mHybridTof) tof = isTOFmatched(trk);
+    if (mHybridTofBetterBetaCuts) {
+        if (mHybridTof) tof = isHybridTOFPionBetterCuts(trk);
+        if (!mHybridTof) tof = isTOFPionBetterCuts(trk);
+    }
 
+
+    if (!mHybridTofBetterBetaCuts) { // Original constant cut
+        if (mHybridTof) tof = isHybridTOFPion(trk);
+        if (!mHybridTof) tof = isTOFPion(trk);
+    }
     return tof;
 }
+
+// _________________________________________________________
+bool StPicoCutsBase::isTOFPionCutOK(StPicoTrack const *trk, float const & tofBeta, int pidFlag) const {
+    if (tofBeta <= 0) {return false;}
+    double ptot    = trk->gPtot();
+    float betaInv = ptot / sqrt(ptot*ptot + mHypotheticalMass2[pidFlag]);
+    float pion_higher = 6-8/3*ptot;
+    float pion_lower = -6+8/3*ptot;
+
+
+    if(ptot<1.5) {
+        return ((1 / tofBeta - 1 / betaInv) / 0.012 < pion_higher && (1 / tofBeta - 1 / betaInv) / 0.012 > pion_lower);
+    }
+    if(ptot>1.5) {
+        return ((1 / tofBeta - 1 / betaInv) / 0.012 < 2 && (1 / tofBeta - 1 / betaInv) / 0.012 > -2);
+    }
+
+    }
+
+// _________________________________________________________
+bool StPicoCutsBase::isTOFBetterPion(StPicoTrack const *trk, float const & tofBeta, int pidFlag) const {
+    return isTOFPionCutOK(trk, tofBeta, pidFlag);
+
+}
+
+// _________________________________________________________
+bool StPicoCutsBase::isHybridTOFBetterPion(StPicoTrack const *trk, float const & tofBeta, int pidFlag) const {
+    if (tofBeta <= 0 || tofBeta != tofBeta )
+        return true;
+
+    return isTOFPionCutOK(trk, tofBeta, pidFlag);
+
+}
+
 
 // _________________________________________________________
 bool StPicoCutsBase::isGoodKaon(StPicoTrack const *const trk) const {

@@ -103,6 +103,15 @@ public:
     bool isHybridTOFKaonBetterCuts(StPicoTrack const *trk, float const & tofBeta) const;
 
 
+    bool isTOFPionCutOK(StPicoTrack const *trk, float const & tofBeta, int pidFlag) const;
+    bool isTOFBetterPion(StPicoTrack const *trk, float const & tofBeta, int pidFlag) const;
+    bool isHybridTOFBetterPion(StPicoTrack const *trk, float const & tofBeta, int pidFlag) const;
+    bool isTOFPionBetterCuts(StPicoTrack const *trk) const;
+    bool isTOFPionBetterCuts(StPicoTrack const *trk, float const & tofBeta) const;
+    bool isHybridTOFPionBetterCuts(StPicoTrack const *trk) const;
+    bool isHybridTOFPionBetterCuts(StPicoTrack const *trk, float const & tofBeta) const;
+
+
     // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
     const unsigned int&  eventStatMax()  const { return mEventStatMax; }
@@ -337,6 +346,14 @@ inline bool StPicoCutsBase::isTOFKaonBetterCuts(StPicoTrack const *trk,   float 
 inline bool StPicoCutsBase::isHybridTOFKaonBetterCuts(StPicoTrack const *trk)   const { float tofBeta = getTofBeta(trk);
     return isHybridTOFBetterKaon(trk, tofBeta, StPicoCutsBase::kKaon); }
 inline bool StPicoCutsBase::isHybridTOFKaonBetterCuts(StPicoTrack const *trk,   float const & tofBeta) const { return isHybridTOFBetterKaon(trk, tofBeta, StPicoCutsBase::kKaon); }
+
+inline bool StPicoCutsBase::isTOFPionBetterCuts(StPicoTrack const *trk)   const { float tofBeta = getTofBeta(trk);
+    return isTOFBetterPion(trk, tofBeta, StPicoCutsBase::kPion); }
+inline bool StPicoCutsBase::isTOFPionBetterCuts(StPicoTrack const *trk,   float const & tofBeta) const { return isTOFBetterPion(trk, tofBeta, StPicoCutsBase::kPion); }
+inline bool StPicoCutsBase::isHybridTOFPionBetterCuts(StPicoTrack const *trk)   const { float tofBeta = getTofBeta(trk);
+    return isHybridTOFBetterPion(trk, tofBeta, StPicoCutsBase::kPion); }
+inline bool StPicoCutsBase::isHybridTOFPionBetterCuts(StPicoTrack const *trk,   float const & tofBeta) const { return isHybridTOFBetterPion(trk, tofBeta, StPicoCutsBase::kPion); }
+
 
 
 #endif
