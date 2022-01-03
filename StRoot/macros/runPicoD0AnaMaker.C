@@ -43,24 +43,24 @@ void runPicoD0AnaMaker(
 
 
     hfCuts->setCutPrimaryDCAtoVtxMax(1.5);
-    hfCuts->setCutVzMax(30.);
-    hfCuts->setCutVzVpdVzMax(6.);
+    hfCuts->setCutVzMax(60.);
+    hfCuts->setCutVzVpdVzMax(60.);
     hfCuts->setCutNHitsFitMin(15);
-    hfCuts->setCutNHitsFitnHitsMax(0.52);
+  //  hfCuts->setCutNHitsFitnHitsMax(0.52);
     hfCuts->setCutRequireHFT(false);
     hfCuts->setHybridTof(true);
     hfCuts->setCheckHotSpot(false);
 
-    hfCuts->setCutTPCNSigmaPion(3.0);
-    hfCuts->setCutTPCNSigmaKaon(2.0);
-    hfCuts->setCutTOFDeltaOneOverBetaKaon(0.05);
-    hfCuts->setCutTOFDeltaOneOverBetaPion(0.05);
+    hfCuts->setCutTPCNSigmaPion(12.0);
+    hfCuts->setCutTPCNSigmaKaon(12.0);
+    hfCuts->setCutTOFDeltaOneOverBetaKaon(0.09);
+    hfCuts->setCutTOFDeltaOneOverBetaPion(0.09);
     hfCuts->setCutPtMin(0.15);
 
     hfCuts->setCutDcaMin(0.002,StHFCuts::kPion);
     hfCuts->setCutDcaMin(0.002,StHFCuts::kKaon);
 
-    hfCuts->setHybridTofBetterBetaCuts(true); // Turns on functional 1/beta cuts
+    hfCuts->setHybridTofBetterBetaCuts(false); // Turns on functional 1/beta cuts
 
 
 //
