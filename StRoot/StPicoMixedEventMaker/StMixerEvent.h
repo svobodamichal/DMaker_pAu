@@ -10,7 +10,7 @@
 /* **************************************************
  *
  * Event class used for mixed event buffer, stripped down 
- * to minimum information neede to reconstruct the helix
+ * to minimum information needed to reconstruct the helix
  * and basic track information. Currently include:
  * 1) primVtx
  * 2) B-Field

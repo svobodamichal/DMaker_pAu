@@ -40,31 +40,44 @@ void runPicoMixedEvent(
 
   StHFCuts* hfCuts = new StHFCuts("hfBaseCuts");
 
-  hfCuts->setBadRunListFileName(badRunListFileName);
-  hfCuts->setCutVzMax(6.);
-  hfCuts->setCutVzVpdVzMax(6.);
-  hfCuts->addTriggerId(530003); //VPD-5
+    hfCuts->setBadRunListFileName(badRunListFileName);
+    hfCuts->addTriggerId(500206); //BHT1*VPDMB-30_nobsmd
+    hfCuts->addTriggerId(500904); //VPDMB-30
+    hfCuts->addTriggerId(500202); //BHT1*VPDMB-30
 
-  hfCuts->setCutNHitsFitMin(15);
-  hfCuts->setCutRequireHFT(true);
-  hfCuts->setHybridTof(true);
 
-  // kaonPion pair cuts
-  float dcaDaughtersMax = 0.2;  // maximum
-  float decayLengthMin  = 0.000; // minimum
-  float decayLengthMax  = 999999; //std::numeric_limits<float>::max();
-  float cosThetaMin     = -20.;   // minimum
-  float minMass         = 1.7;
-  float maxMass         = 2.1;
-  float pairDcaMax      = 99.9;
+    hfCuts->setCutPrimaryDCAtoVtxMax(1.5);
+    hfCuts->setCutVzMax(30.);
+    hfCuts->setCutVzVpdVzMax(6.);
+    hfCuts->setCutNHitsFitMin(15);
+    hfCuts->setCutNHitsFitnHitsMax(0.52);
+    hfCuts->setCutRequireHFT(false);
+    hfCuts->setHybridTof(true);
+    hfCuts->setCheckHotSpot(false);
+
+    hfCuts->setCutTPCNSigmaPion(3.0);
+    hfCuts->setCutTPCNSigmaKaon(2.0);
+    hfCuts->setCutTOFDeltaOneOverBetaKaon(0.03);
+    hfCuts->setCutTOFDeltaOneOverBetaPion(0.03);
+    hfCuts->setCutPtMin(0.15);
+
+    hfCuts->setCutDcaMin(0.002,StHFCuts::kPion);
+    hfCuts->setCutDcaMin(0.002,StHFCuts::kKaon);
+
+    hfCuts->setHybridTofBetterBetaCuts(true); // Turns on functional 1/beta cuts
+
+
+    float dcaDaughtersMax = 0.5;  // maximum toto ide
+    float decayLengthMin  = 0.009; // minimum
+    float decayLengthMax  = 999.;  //std::numeric_limits<float>::max(); toto ide (cutuje)
+    float cosThetaMin     = 0.5;   // minimum
+    float minMass         = 0.5;
+    float maxMass         = 2.5;
+    float pairDcaMax      = 99.9;
+
 
   hfCuts->setCutSecondaryPair(dcaDaughtersMax, decayLengthMin, decayLengthMax, cosThetaMin, minMass, maxMass, pairDcaMax);
 
-  hfCuts->setCutTPCNSigmaPion(3.0);
-  hfCuts->setCutTPCNSigmaKaon(2.0);
-  hfCuts->setCutTOFDeltaOneOverBetaKaon(0.03);
-  hfCuts->setCutTOFDeltaOneOverBetaPion(0.03);
-  hfCuts->setCutPtMin(0.15);
 
   StPicoDstMaker* picoDstMaker = new StPicoDstMaker(static_cast<StPicoDstMaker::PicoIoMode>(StPicoDstMaker::IoRead), inputFile, "picoDstMaker");
   StPicoMixedEventMaker* picoMixedEventMaker = new StPicoMixedEventMaker("picoMixedEventMaker", picoDstMaker, hfCuts, outputFile);

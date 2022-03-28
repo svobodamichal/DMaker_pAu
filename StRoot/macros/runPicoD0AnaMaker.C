@@ -18,9 +18,9 @@
 using namespace std;
 
 void runPicoD0AnaMaker(
-    const char*  inputFile,
-    const Char_t *outputFile,  
-    const Char_t *badRunListFileName) {
+        const char*  inputFile,
+        const Char_t *outputFile,
+        const Char_t *badRunListFileName) {
     string SL_version = "SL18f";
     string env_SL = getenv ("STAR");
     if (env_SL.find(SL_version)==string::npos) {
@@ -39,7 +39,10 @@ void runPicoD0AnaMaker(
     StHFCuts* hfCuts = new StHFCuts("hfBaseCuts");
 
     hfCuts->setBadRunListFileName(badRunListFileName);
-    hfCuts->addTriggerId(500206); //VPD-5
+    hfCuts->addTriggerId(500206); //BHT1*VPDMB-30_nobsmd
+    hfCuts->addTriggerId(500904); //VPDMB-30
+    hfCuts->addTriggerId(500202); //BHT1*VPDMB-30
+
 
 
     hfCuts->setCutPrimaryDCAtoVtxMax(1.5);
