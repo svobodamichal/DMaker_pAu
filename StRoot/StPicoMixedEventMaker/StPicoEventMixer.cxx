@@ -137,6 +137,9 @@ void StPicoEventMixer::mixEvents() {
                 ntVar[ii++] = pair->pt();
                 ntVar[ii++] = pair->m();
 
+
+                cout << "Hmotnost je " << m() << "neceho" <<endl;
+
                 int charge = mEvents.at(0)->pionAt(iTrk1).charge() +  mEvents.at(iEvt2)->kaonAt(iTrk2).charge(); // 0 = signal
 
                 if(iEvt2 == 0)
