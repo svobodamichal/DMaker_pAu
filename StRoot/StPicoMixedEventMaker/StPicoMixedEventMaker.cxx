@@ -164,8 +164,6 @@ Int_t StPicoMixedEventMaker::Make() {
         return kStWarn;
     }
 
-    cout << "Test make" <<endl;
-
 
     int aEventStat[mHFCuts->eventStatMax()];
     bool eventTest = mHFCuts->isGoodEvent(picoDst, aEventStat);

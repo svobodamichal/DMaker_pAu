@@ -76,11 +76,14 @@ bool StPicoEventMixer::addPicoEvent(StPicoDst const* const picoDst, float weight
         }
     }
 
+    cout <<"Test po pridani" <<endl;
+
     if ( event->getNoPions() > 0 ||  event->getNoKaons() > 0) {
         mEvents.push_back(event);
         filledBuffer+=1;
     }
 
+    cout <<"Test konec" <<endl;
     //Returns true if need to do mixing, false if buffer has space still
     if ( filledBuffer == mEventsBuffer)
         return true;
@@ -88,10 +91,12 @@ bool StPicoEventMixer::addPicoEvent(StPicoDst const* const picoDst, float weight
 }
 //-----------------------------------------------------------
 void StPicoEventMixer::mixEvents() {
+    cout << "Test mixEvents" <<endl;
+
+
     size_t const nEvent = mEvents.size();
     int const nTracksEvt1 = mEvents.at(0)->getNoPions();
 
-    cout << "Test mixEvents" <<endl;
 
     // Go through the event buffer
     for( size_t iEvt2 = 0; iEvt2 < nEvent; ++iEvt2) {
