@@ -54,8 +54,6 @@ bool StPicoEventMixer::addPicoEvent(StPicoDst const* const picoDst, float weight
     StMixerEvent* event = new StMixerEvent(pVertex, picoDst->event()->bField());
     event->addPicoEvent(*(picoDst->event()));
 
-    cout << "Test addPicoEvent"<<endl;
-
     for(unsigned int iTrk = 0; iTrk < nTracks; ++iTrk) {
         StPicoTrack const* trk = picoDst->track(iTrk);
         bool saveTrack = false;
@@ -76,17 +74,16 @@ bool StPicoEventMixer::addPicoEvent(StPicoDst const* const picoDst, float weight
         }
     }
 
-    cout <<"Test po pridani" <<endl;
-
     if ( event->getNoPions() > 0 ||  event->getNoKaons() > 0) {
         mEvents.push_back(event);
         filledBuffer+=1;
     }
 
-    cout <<"Test konec" <<endl;
     //Returns true if need to do mixing, false if buffer has space still
-    if ( filledBuffer == mEventsBuffer)
+    if ( filledBuffer == mEventsBuffer) {
         return true;
+        cout << "True" <<endl;
+    }
     return false;
 }
 //-----------------------------------------------------------
