@@ -17,6 +17,8 @@
 #include <vector>
 #include <string>
 
+using namespace std;
+
 ClassImp(StPicoMixedEventMaker)
 
 //static const int m_nmultEdge = 7;
@@ -161,6 +163,9 @@ Int_t StPicoMixedEventMaker::Make() {
         LOG_WARN << "No picoDst ! Skipping! "<<endm;
         return kStWarn;
     }
+
+    cout << "Test make" <<emdl;
+
 
     int aEventStat[mHFCuts->eventStatMax()];
     bool eventTest = mHFCuts->isGoodEvent(picoDst, aEventStat);

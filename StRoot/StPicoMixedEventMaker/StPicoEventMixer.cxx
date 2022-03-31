@@ -20,6 +20,8 @@
 #include "StMixerPair.h"
 
 
+using namespace std;
+
 //-----------------------------------------------------------
 StPicoEventMixer::StPicoEventMixer(char* category):
         mEvents(),
@@ -51,6 +53,8 @@ bool StPicoEventMixer::addPicoEvent(StPicoDst const* const picoDst, float weight
     TVector3 pVertex = picoDst->event()->primaryVertex();
     StMixerEvent* event = new StMixerEvent(pVertex, picoDst->event()->bField());
     event->addPicoEvent(*(picoDst->event()));
+
+    cout << "Test addPicoEvent"<<endl;
 
     for(unsigned int iTrk = 0; iTrk < nTracks; ++iTrk) {
         StPicoTrack const* trk = picoDst->track(iTrk);
@@ -86,6 +90,8 @@ bool StPicoEventMixer::addPicoEvent(StPicoDst const* const picoDst, float weight
 void StPicoEventMixer::mixEvents() {
     size_t const nEvent = mEvents.size();
     int const nTracksEvt1 = mEvents.at(0)->getNoPions();
+
+    cout << "Test mixEvents" <<endl;
 
     // Go through the event buffer
     for( size_t iEvt2 = 0; iEvt2 < nEvent; ++iEvt2) {
@@ -138,7 +144,6 @@ void StPicoEventMixer::mixEvents() {
                 ntVar[ii++] = pair->m();
 
 
-                cout << "Hmotnost je " << m() << "neceho" <<endl;
 
                 int charge = mEvents.at(0)->pionAt(iTrk1).charge() +  mEvents.at(iEvt2)->kaonAt(iTrk2).charge(); // 0 = signal
 
