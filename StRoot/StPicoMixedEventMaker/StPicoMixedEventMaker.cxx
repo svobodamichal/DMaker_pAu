@@ -164,7 +164,7 @@ Int_t StPicoMixedEventMaker::Make() {
         return kStWarn;
     }
 
-    cout << "Test make" <<emdl;
+    cout << "Test make" <<endl;
 
 
     int aEventStat[mHFCuts->eventStatMax()];
