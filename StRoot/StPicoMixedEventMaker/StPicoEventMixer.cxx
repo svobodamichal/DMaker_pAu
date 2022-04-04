@@ -81,6 +81,7 @@ bool StPicoEventMixer::addPicoEvent(StPicoDst const* const picoDst, float weight
 
     //Returns true if need to do mixing, false if buffer has space still
     if ( filledBuffer == mEventsBuffer) {
+        cout << "Filled buffer je " << filledBuffer << " a Event Buffer" << mEventsBuffer <<endl;
         cout << "True" <<endl;
         return true;
     }
