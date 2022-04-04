@@ -77,11 +77,15 @@ bool StPicoEventMixer::addPicoEvent(StPicoDst const* const picoDst, float weight
     if ( event->getNoPions() > 0 ||  event->getNoKaons() > 0) {
         mEvents.push_back(event);
         filledBuffer+=1;
+        cout << "Předposlední if: Filled buffer je " << filledBuffer << " a Event Buffer" << mEventsBuffer <<endl;
+
     }
+    cout << "Mezi ify: Filled buffer je " << filledBuffer << " a Event Buffer" << mEventsBuffer <<endl;
+
 
     //Returns true if need to do mixing, false if buffer has space still
     if ( filledBuffer == mEventsBuffer) {
-        cout << "Filled buffer je " << filledBuffer << " a Event Buffer" << mEventsBuffer <<endl;
+        cout << "Poslední if: Filled buffer je " << filledBuffer << " a Event Buffer" << mEventsBuffer <<endl;
         cout << "True" <<endl;
         return true;
     }
