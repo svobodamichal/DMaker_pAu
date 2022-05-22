@@ -18,7 +18,7 @@
 #include "StPicoHFMaker/StPicoHFEvent.h"
 #include "StPicoHFMaker/StHFCuts.h"
 #include "StPicoHFMaker/StHFPair.h"
-//#include "StPicoHFMaker/StHFTriplet.h"
+#include "StPicoHFMaker/StHFTriplet.h"
 
 #include "TMVA/Tools.h"
 #include "TMVA/Reader.h"
@@ -36,6 +36,7 @@ class StPicoTrack;
 class StPicoHFEvent;
 
 class StHFPair;
+class StHFTriplet;
 class StHFCuts;
 
 class StPicoD0AnaMaker : public StPicoHFMaker
@@ -65,6 +66,10 @@ private:
 
     TNtuple *ntp_DMeson_Signal;
     TNtuple *ntp_DMeson_Background;
+
+    TNtuple *ntp_DstarMeson_Signal;
+    TNtuple *ntp_DstarMeson_Background;
+
 
     int mRunNumber;
     Int_t nPrimary;

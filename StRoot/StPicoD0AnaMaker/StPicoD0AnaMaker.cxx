@@ -6,6 +6,8 @@
 #include "phys_constants.h"
 #include "StPicoD0AnaMaker.h"
 #include "StPicoKFVertexFitter/StPicoKFVertexFitter.h"
+#include "StHFTriplet.h"
+
 ClassImp(StPicoD0AnaMaker)
 
 const int nptBins=3;
@@ -90,10 +92,15 @@ int StPicoD0AnaMaker::InitHF() {
     mOutFileBaseName = mOutFileBaseName.ReplaceAll(".root", "");
     TString ntpVars = "grefMult:refMult:runId:eventId:ZDC:BBC:hotSpot:primary:diffRemovedPrimary:pi1_pt:pi1_p:pi1_dca:pi1_nSigma:pi1_nHitFit:pi1_TOFinvbeta:pi1_betaBase:k_pt:k_p:k_dca:k_nSigma:k_nHitFit:k_TOFinvbeta:k_betaBase:dcaDaughters:primVz:primVzVpd:D_theta:cosTheta:D_decayL:dcaD0ToPv:D_cosThetaStar"
                       ":D_pt:D_mass";
+    TString ntpVars2 = "grefMult:refMult:runId:eventId:ZDC:BBC:hotSpot:primary:diffRemovedPrimary:pi1_pt:pi1_p:pi1_dca:pi1_nSigma:pi1_nHitFit:pi1_TOFinvbeta:pi1_betaBase:k_pt:k_p:k_dca:k_nSigma:k_nHitFit:k_TOFinvbeta:k_betaBase:pi2_pt:pi2_p:pi2_dca:pi2_nSigma:pi2_nHitFit:pi2_TOFinvbeta:pi2_betaBase:primVz:primVzVpd"
+                      ":Dstar_pt:Dstar_mass";
+
 //    ntp_kaon = new TNtuple("ntp_kaon", "kaon tree","k_pt:k_phi:k_eta:k_nSigma:k_nHitFit:k_TOFinvbeta:pi_eventId:pi_runId");
 //    ntp_pion = new TNtuple("ntp_pion", "pion tree","pi_pt:pi_phi:pi_eta:pi_nSigma:pi_nHitFit:pi_TOFinvbeta:k_eventId:k_runId");
     ntp_DMeson_Signal = new TNtuple("ntp_signal","DMeson TreeSignal", ntpVars);
     ntp_DMeson_Background = new TNtuple("ntp_background","DMeson TreeBackground", ntpVars);
+    ntp_DstarMeson_Signal = new TNtuple("Dntp_signal","DstarMeson TreeSignal", ntpVars);
+    ntp_DstarMeson_Background = new TNtuple("Dntp_background","DstarMeson TreeBackground", ntpVars);
 
     if (mSwitchRefit) {
         TString dir = "./StRoot/weights/";
@@ -127,6 +134,8 @@ void StPicoD0AnaMaker::ClearHF(Option_t *opt="") {
 int StPicoD0AnaMaker::FinishHF() {
     ntp_DMeson_Signal -> Write(ntp_DMeson_Signal->GetName(), TObject::kOverwrite);
     ntp_DMeson_Background -> Write(ntp_DMeson_Background->GetName(), TObject::kOverwrite);
+    ntp_DstarMeson_Signal -> Write(ntp_DstarMeson_Signal->GetName(), TObject::kOverwrite);
+    ntp_DstarMeson_Background -> Write(ntp_DstarMeson_Background->GetName(), TObject::kOverwrite);
 //    ntp_pion -> Write(ntp_pion->GetName(), TObject::kOverwrite);
 //    ntp_kaon -> Write(ntp_kaon->GetName(), TObject::kOverwrite);
     return kStOK;
@@ -238,6 +247,7 @@ int StPicoD0AnaMaker::createCandidates() {
     UInt_t nTracks = mPicoDst->numberOfTracks();
 
     Int_t nD0 = 0;
+    Int_t nDstar = 0;
     nPrimary = 0;
 
     for (unsigned short iTrack = 0; iTrack < nTracks; ++iTrack) {
@@ -341,6 +351,104 @@ int StPicoD0AnaMaker::createCandidates() {
                 ntp_DMeson_Background->Fill(ntVar);
             }
 
+            // TADY ZACINA JOKUSE POKUSE
+            for (unsigned short idxPion2 = idxPion1+1; idxPion2 < mIdxPicoPions.size(); ++idxPion2){
+
+                StPicoTrack *pion2 = mPicoDst->track(mIdxPicoPions[idxPion2]);
+                if (mIdxPicoKaons[idxKaon] == mIdxPicoPions[idxPion1]|| mIdxPicoKaons[idxKaon] == mIdxPicoPions[idxPion2] || mIdxPicoPions[idxPion1] == mIdxPicoPions[idxPion2]) continue;
+
+                StHFTriplet *triplet = new StHFTriplet(pion1,kaon,pion2,mHFCuts->getHypotheticalMass(StHFCuts::kPion),mHFCuts->getHypotheticalMass(StHFCuts::kKaon),mHFCuts->getHypotheticalMass(StHFCuts::kPion), mIdxPicoPions[idxPion1],mIdxPicoKaons[idxKaon],mIdxPicoPions[idxPion2], mPrimVtx, mBField);
+
+
+                if (!mHFCuts->isGoodSecondaryVertexPair(pair)) continue;
+
+                bool isDstar = false;
+                if((kaon->charge() + pion1->charge() == 0)&&(pion1->charge() == pion2->charge()) ) isDstar=true;
+
+                Float_t primary2 = 0;
+                if (pion1->isPrimary()) primary2 = 3;
+                if (kaon->isPrimary()) primary2 = 4;
+                if (pion2->isPrimary()) primary2 = 5;
+                if (pion1->isPrimary() && kaon->isPrimary() && pion2->isPrimary()) primary2 = 2;
+
+                Float_t hotSpot2=0;
+                if (mHFCuts->checkHotSpot(&mPrimVtx)) hotSpot2=1;
+
+                const int nNtVars2 = ntp_DstarMeson_Signal->GetNvar();
+                float ntVar2[nNtVars2];
+                int iii=0;
+
+                ntVar2[iii++] = mPicoEvent->grefMult();
+                ntVar2[iii++] = mPicoEvent->refMult();
+                ntVar2[iii++] = mPicoEvent->runId();
+                ntVar2[iii++] = mPicoEvent->eventId();
+                ntVar2[iii++] = mPicoEvent->ZDCx();
+                ntVar2[iii++] = mPicoEvent->BBCx();
+                ntVar2[iii++] = hotSpot2;
+
+                ntVar2[iii++] = primary2;
+                ntVar2[iii++] = nGoodTracks;
+
+                ntVar2[iii++] = pion1->gPt();
+                ntVar2[iii++] = pion1->gPtot();
+                ntVar2[iii++] = triplet->particle1Dca();
+                ntVar2[iii++] = pion1->nSigmaPion();
+                ntVar2[iii++] = pion1->nHitsFit();
+                ntVar2[iii++] = mHFCuts->getOneOverBeta(pion1, mHFCuts->getTofBetaBase(pion1), StPicoCutsBase::kPion);
+                ntVar2[iii++] = mHFCuts->getTofBetaBase(pion1);
+
+                ntVar2[iii++] = kaon->gPt();
+                ntVar2[iii++] = kaon->gPtot();
+                ntVar2[iii++] = triplet->particle2Dca();
+                ntVar2[iii++] = kaon->nSigmaKaon();
+                ntVar2[iii++] = kaon->nHitsFit();
+                ntVar2[iii++] = mHFCuts->getOneOverBeta(kaon, mHFCuts->getTofBetaBase(kaon), StPicoCutsBase::kKaon);
+                ntVar2[iii++] = mHFCuts->getTofBetaBase(kaon);
+
+                ntVar2[iii++] = pion2->gPt();
+                ntVar2[iii++] = pion2->gPtot();
+                ntVar2[iii++] = triplet->particle3Dca();
+                ntVar2[iii++] = pion2->nSigmaPion();
+                ntVar2[iii++] = pion2->nHitsFit();
+                ntVar2[iii++] = mHFCuts->getOneOverBeta(pion2, mHFCuts->getTofBetaBase(pion2), StPicoCutsBase::kPion);
+                ntVar2[iii++] = mHFCuts->getTofBetaBase(pion2);
+
+
+             //   ntVar2[iii++] = pair->dcaDaughters();
+                ntVar2[iii++] = mPrimVtx.z();
+                ntVar2[iii++] = mPicoEvent->vzVpd();
+
+              //  ntVar2[iii++] = pair->pointingAngle();
+              //  ntVar2[iii++] = cos(pair->pointingAngle());
+              //  ntVar2[iii++] = pair->decayLength();
+              //  ntVar2[iii++] = triplet->DcaToPrimaryVertex(); //(pair->decayLength())*sin(pair->pointingAngle());
+              //  ntVar2[iii++] = pair->cosThetaStar();
+
+                ntVar2[iii++] = triplet->pt();
+                ntVar2[iii++] = triplet->m();
+
+                if (isDstar) {
+                    ntp_DstarMeson_Signal->Fill(ntVar2);
+                    nDstar++;
+                } else {
+                    ntp_DstarMeson_Background->Fill(ntVar2);
+                }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            }  //  for (unsigned short idxPion2 = idxPion1+1; idxPion2 < mIdxPicoPions.size(); ++idxPion2)
         }  // for (unsigned short idxKaon = 0; idxKaon < mIdxPicoKaons.size(); ++idxKaon)
     } // for (unsigned short idxPion1 = 0; idxPion1 < mIdxPicoPions.size(); ++idxPion1)
 

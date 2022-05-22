@@ -1,6 +1,8 @@
 #include "StPicoEvent/StPicoEvent.h"
 #include "StPicoHFEvent.h"
 #include "StHFPair.h"
+#include "StHFTriplet.h"
+
 
 ClassImp(StPicoHFEvent)
 
