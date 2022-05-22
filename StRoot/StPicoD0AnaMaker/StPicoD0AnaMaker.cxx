@@ -357,10 +357,10 @@ int StPicoD0AnaMaker::createCandidates() {
                 StPicoTrack *pion2 = mPicoDst->track(mIdxPicoPions[idxPion2]);
                 if (mIdxPicoKaons[idxKaon] == mIdxPicoPions[idxPion1]|| mIdxPicoKaons[idxKaon] == mIdxPicoPions[idxPion2] || mIdxPicoPions[idxPion1] == mIdxPicoPions[idxPion2]) continue;
 
-                StHFTriplet *triplet = new StHFTriplet(pion1,kaon,pion2,mHFCuts->getHypotheticalMass(StHFCuts::kPion),mHFCuts->getHypotheticalMass(StHFCuts::kKaon),mHFCuts->getHypotheticalMass(StHFCuts::kPion), mIdxPicoPions[idxPion1],mIdxPicoKaons[idxKaon],mIdxPicoPions[idxPion2], mPrimVtx, mBField);
+                StHFTriplet triplet(pion1,kaon,pion2,mHFCuts->getHypotheticalMass(StHFCuts::kPion),mHFCuts->getHypotheticalMass(StHFCuts::kKaon),mHFCuts->getHypotheticalMass(StHFCuts::kPion), mIdxPicoPions[idxPion1],mIdxPicoKaons[idxKaon],mIdxPicoPions[idxPion2], mPrimVtx, mBField);
 
 
-                if (!mHFCuts->isGoodSecondaryVertexPair(pair)) continue;
+                if (!mHFCuts->isGoodSecondaryVertexPair(triplet)) continue;
 
                 bool isDstar = false;
                 if((kaon->charge() + pion1->charge() == 0)&&(pion1->charge() == pion2->charge()) ) isDstar=true;
