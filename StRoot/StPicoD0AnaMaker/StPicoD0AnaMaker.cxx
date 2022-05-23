@@ -390,7 +390,6 @@ int StPicoD0AnaMaker::createCandidates() {
 
                 ntVar2[iii++] = pion1->gPt();
                 ntVar2[iii++] = pion1->gPtot();
-                ntVar2[iii++] = triplet->mParticle1Dca();
                 ntVar2[iii++] = pion1->nSigmaPion();
                 ntVar2[iii++] = pion1->nHitsFit();
                 ntVar2[iii++] = mHFCuts->getOneOverBeta(pion1, mHFCuts->getTofBetaBase(pion1), StPicoCutsBase::kPion);
@@ -398,7 +397,6 @@ int StPicoD0AnaMaker::createCandidates() {
 
                 ntVar2[iii++] = kaon->gPt();
                 ntVar2[iii++] = kaon->gPtot();
-                ntVar2[iii++] = triplet->mParticle2Dca();
                 ntVar2[iii++] = kaon->nSigmaKaon();
                 ntVar2[iii++] = kaon->nHitsFit();
                 ntVar2[iii++] = mHFCuts->getOneOverBeta(kaon, mHFCuts->getTofBetaBase(kaon), StPicoCutsBase::kKaon);
@@ -406,7 +404,6 @@ int StPicoD0AnaMaker::createCandidates() {
 
                 ntVar2[iii++] = pion2->gPt();
                 ntVar2[iii++] = pion2->gPtot();
-                ntVar2[iii++] = triplet->mParticle3Dca();
                 ntVar2[iii++] = pion2->nSigmaPion();
                 ntVar2[iii++] = pion2->nHitsFit();
                 ntVar2[iii++] = mHFCuts->getOneOverBeta(pion2, mHFCuts->getTofBetaBase(pion2), StPicoCutsBase::kPion);
