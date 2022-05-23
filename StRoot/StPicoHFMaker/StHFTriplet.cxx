@@ -63,7 +63,7 @@ StHFTriplet::StHFTriplet(StPicoTrack const * const particle1, StPicoTrack const 
 	//-----------------------------------------------------------------------------------------	
 
     StPicoPhysicalHelix p1Helix = particle1->helix(bField);
-    StPicoPhysicalHelix p2Helix = particle2->helix(bField)
+    StPicoPhysicalHelix p2Helix = particle2->helix(bField);
     StPicoPhysicalHelix p3Helix = particle3->helix(bField);
 
     // move origins of helices to the primary vertex origin - needed lated in the code
@@ -96,24 +96,24 @@ StHFTriplet::StHFTriplet(StPicoTrack const * const particle1, StPicoTrack const 
     TVector3 const p1AtDcaToP3 = p1StraightLine.at(ss31.second);
   
   // -- calculate DCA of particle1 to particl2 at their DCA
-  mDcaDaughters12 = (p1AtDcaToP2 - p2AtDcaToP1).mag();
+  mDcaDaughters12 = (p1AtDcaToP2 - p2AtDcaToP1).Mag();
   
   // -- calculate DCA of particle2 to particl3 at their DCA
-  mDcaDaughters23 = (p2AtDcaToP3 - p3AtDcaToP2).mag();
+  mDcaDaughters23 = (p2AtDcaToP3 - p3AtDcaToP2).Mag();
   
   // -- calculate DCA of particle3 to particle1 at their DCA
-  mDcaDaughters31 = (p3AtDcaToP1 - p1AtDcaToP3).mag();
+  mDcaDaughters31 = (p3AtDcaToP1 - p1AtDcaToP3).Mag();
   
   // -- calculate decay vertex (secondary)
     TVector3 mDecayVertex = ( p1AtDcaToP2 + p2AtDcaToP1 + p2AtDcaToP3 + p3AtDcaToP2 + p3AtDcaToP1 + p1AtDcaToP3 ) / 6.0;
   
   //kvapil begin
   // Distance between v12 and v23
-  float const v12 = (p1AtDcaToP2 + p2AtDcaToP1 - p2AtDcaToP3 - p3AtDcaToP2).mag()/2.0;
+  float const v12 = (p1AtDcaToP2 + p2AtDcaToP1 - p2AtDcaToP3 - p3AtDcaToP2).Mag()/2.0;
   // Distance between v23 and v31
-  float const v23 = (p2AtDcaToP3 + p3AtDcaToP2 - p3AtDcaToP1 - p1AtDcaToP3).mag()/2.0;
+  float const v23 = (p2AtDcaToP3 + p3AtDcaToP2 - p3AtDcaToP1 - p1AtDcaToP3).Mag()/2.0;
   // Distance between v31 and v12
-  float const v31 = (p3AtDcaToP1 + p1AtDcaToP3 - p1AtDcaToP2 - p2AtDcaToP1).mag()/2.0;
+  float const v31 = (p3AtDcaToP1 + p1AtDcaToP3 - p1AtDcaToP2 - p2AtDcaToP1).Mag()/2.0;
 
   //maximum dist between reo v0's to be averaging
   float const max12 =  v12 > v23 ? v12 : v23 ;
@@ -140,20 +140,20 @@ StHFTriplet::StHFTriplet(StPicoTrack const * const particle1, StPicoTrack const 
    
   // -- calculate cosThetaStar
   //    ->> Lomnitz: Need to rethink theta star
-    TLorentzVector const tripletFourMomReverse(-mLorentzVector.px(), -mLorentzVector.py(), -mLorentzVector.pz(), mLorentzVector.e());
-    TLorentzVector const p1FourMomStar = p1FourMom.boost(tripletFourMomReverse);
-  mCosThetaStar = std::cos(p1FourMomStar.vect().angle(mLorentzVector.vect()));
+    TLorentzVector const tripletFourMomReverse(-mLorentzVector.Px(), -mLorentzVector.Py(), -mLorentzVector.Pz(), mLorentzVector.E());
+    TLorentzVector const p1FourMomStar = p1FourMom.Boost(tripletFourMomReverse);
+  mCosThetaStar = std::cos(p1FourMomStar.Vect().angle(mLorentzVector.Vect()));
   
   // -- calculate pointing angle and decay length
     TVector3 const vtxToV0 = mDecayVertex - vtx;
-  mPointingAngle = vtxToV0.angle(mLorentzVector.vect());
-  mDecayLength = vtxToV0.mag();
+  mPointingAngle = vtxToV0.Angle(mLorentzVector.Vect());
+  mDecayLength = vtxToV0.Mag();
 
  
   // --- calculate DCA of tracks to primary vertex
-  mParticle1Dca = (p1Helix.origin() - vtx).mag();
-  mParticle2Dca = (p2Helix.origin() - vtx).mag();
-  mParticle3Dca = (p3Helix.origin() - vtx).mag();
+  mParticle1Dca = (p1Helix.origin() - vtx).Mag();
+  mParticle2Dca = (p2Helix.origin() - vtx).Mag();
+  mParticle3Dca = (p3Helix.origin() - vtx).Mag();
 
 }
 
