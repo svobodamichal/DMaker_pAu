@@ -23,7 +23,10 @@
 
 #include "TObject.h"
 #include "TClonesArray.h"
+#include "TVector3.h"
+#include "TLorentzVector.h"
 
+#include "StPicoEvent/StPicoEvent.h"
 
 class StPicoTrack;
 class StPicoEvent;
