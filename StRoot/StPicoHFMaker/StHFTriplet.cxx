@@ -3,14 +3,13 @@
 
 #include "StHFTriplet.h"
 
-#include "StarClassLibrary/StPhysicalHelixD.hh"
 #include "StarClassLibrary/SystemOfUnits.h"
 #include "StPicoEvent/StPicoTrack.h"
 
 ClassImp(StHFTriplet)
 
 // _________________________________________________________
-StHFTriplet::StHFTriplet(): mLorentzVector(StLorentzVectorF()), mDecayVertex(StThreeVectorF()),
+StHFTriplet::StHFTriplet(): mLorentzVector(StLorentzVectorF()), mDecayVertex(TVector3()),
   mPointingAngle(std::numeric_limits<float>::quiet_NaN()), mDecayLength(std::numeric_limits<float>::quiet_NaN()),
   mParticle1Dca(std::numeric_limits<float>::quiet_NaN()), mParticle2Dca(std::numeric_limits<float>::quiet_NaN()), 
   mParticle3Dca(std::numeric_limits<float>::quiet_NaN()),
@@ -35,8 +34,8 @@ StHFTriplet::StHFTriplet(StHFTriplet const * t) :
 StHFTriplet::StHFTriplet(StPicoTrack const * const particle1, StPicoTrack const * const particle2, StPicoTrack const * const particle3,
 			 float p1MassHypo, float p2MassHypo, float p3MassHypo,
 			 unsigned short const p1Idx, unsigned short const p2Idx, unsigned short const p3Idx,
-			 StThreeVectorF const & vtx, float const bField)  : 
-  mLorentzVector(StLorentzVectorF()), mDecayVertex(StThreeVectorF()),
+			 TVector3 const & vtx, float const bField)  :
+  mLorentzVector(TLorentzVector()), mDecayVertex(TVector3()),
   mPointingAngle(std::numeric_limits<float>::quiet_NaN()), mDecayLength(std::numeric_limits<float>::quiet_NaN()),
   mParticle1Dca(std::numeric_limits<float>::quiet_NaN()), mParticle2Dca(std::numeric_limits<float>::quiet_NaN()), 
   mParticle3Dca(std::numeric_limits<float>::quiet_NaN()),
@@ -61,38 +60,39 @@ StHFTriplet::StHFTriplet(StPicoTrack const * const particle1, StPicoTrack const 
   }
 
 	//-----------------------------------------------------------------------------------------	
-	// -- use straight lines approximation to get point of DCA of particle1-particle2 pair
-	//SL16j, Vanek
-	StPhysicalHelixD p1Helix = particle1->helix(bField); //used at line 137
-  StPhysicalHelixD p2Helix = particle2->helix(bField); //bFiled NOT in kilogauss - properly computed inside helix(double) function in StPicoTrack
-  StPhysicalHelixD p3Helix = particle3->helix(bField);
 
-  // -- move origins of helices to the primary vertex origin - needed lated in the code
-  p1Helix.moveOrigin(p1Helix.pathLength(vtx));
-  p2Helix.moveOrigin(p2Helix.pathLength(vtx));
-  p3Helix.moveOrigin(p3Helix.pathLength(vtx));
+    StPicoPhysicalHelix p1Helix = particle1->helix(bField);
+    StPicoPhysicalHelix p2Helix = particle2->helix(bField)
+    StPicoPhysicalHelix p3Helix = particle3->helix(bField);
 
-  StThreeVectorF const p1Mom = particle1->gMom();
-  StThreeVectorF const p2Mom = particle2->gMom();
-  StThreeVectorF const p3Mom = particle3->gMom();
-  
-  StPhysicalHelixD const p1StraightLine(p1Mom, particle1->origin(), 0, particle1->charge());
-  StPhysicalHelixD const p2StraightLine(p2Mom, particle2->origin(), 0, particle2->charge());
-  StPhysicalHelixD const p3StraightLine(p3Mom, particle3->origin(), 0, particle3->charge());
+    // move origins of helices to the primary vertex origin - needed lated in the code
+    p1Helix.moveOrigin(p1Helix.pathLength(vtx));
+    p2Helix.moveOrigin(p2Helix.pathLength(vtx));
+    p3Helix.moveOrigin(p3Helix.pathLength(vtx));
+
+    // use straight lines approximation to get point of DCA of kaon-pion pair
+    TVector3 const p1Mom = p1Helix.momentum(bField * kilogauss);
+    TVector3 const p2Mom = p2Helix.momentum(bField * kilogauss);
+    TVector3 const p3Mom = p3Helix.momentum(bField * kilogauss);
+
+    StPicoPhysicalHelix const p1StraightLine(p1Mom, p1Helix.origin(), 0, particle1->charge());
+    StPicoPhysicalHelix const p2StraightLine(p2Mom, p2Helix.origin(), 0, particle2->charge());
+    StPicoPhysicalHelix const p3StraightLine(p3Mom, p3Helix.origin(), 0, particle3->charge());
+
 
 //-----------------------------------------------------------------------------------------
   
   pair<double, double> const ss12 = p1StraightLine.pathLengths(p2StraightLine);
-  StThreeVectorF const p1AtDcaToP2 = p1StraightLine.at(ss12.first);
-  StThreeVectorF const p2AtDcaToP1 = p2StraightLine.at(ss12.second);
+    TVector3 const p1AtDcaToP2 = p1StraightLine.at(ss12.first);
+    TVector3 const p2AtDcaToP1 = p2StraightLine.at(ss12.second);
 
   pair<double, double> const ss23 = p2StraightLine.pathLengths(p3StraightLine);
-  StThreeVectorF const p2AtDcaToP3 = p2StraightLine.at(ss23.first);
-  StThreeVectorF const p3AtDcaToP2 = p3StraightLine.at(ss23.second);
+    TVector3 const p2AtDcaToP3 = p2StraightLine.at(ss23.first);
+    TVector3 const p3AtDcaToP2 = p3StraightLine.at(ss23.second);
   
   pair<double, double> const ss31 = p3StraightLine.pathLengths(p1StraightLine);
-  StThreeVectorF const p3AtDcaToP1 = p3StraightLine.at(ss31.first);
-  StThreeVectorF const p1AtDcaToP3 = p1StraightLine.at(ss31.second);
+    TVector3 const p3AtDcaToP1 = p3StraightLine.at(ss31.first);
+    TVector3 const p1AtDcaToP3 = p1StraightLine.at(ss31.second);
   
   // -- calculate DCA of particle1 to particl2 at their DCA
   mDcaDaughters12 = (p1AtDcaToP2 - p2AtDcaToP1).mag();
@@ -104,7 +104,7 @@ StHFTriplet::StHFTriplet(StPicoTrack const * const particle1, StPicoTrack const 
   mDcaDaughters31 = (p3AtDcaToP1 - p1AtDcaToP3).mag();
   
   // -- calculate decay vertex (secondary)
-  StThreeVectorF mDecayVertex = ( p1AtDcaToP2 + p2AtDcaToP1 + p2AtDcaToP3 + p3AtDcaToP2 + p3AtDcaToP1 + p1AtDcaToP3 ) / 6.0;
+    TVector3 mDecayVertex = ( p1AtDcaToP2 + p2AtDcaToP1 + p2AtDcaToP3 + p3AtDcaToP2 + p3AtDcaToP1 + p1AtDcaToP3 ) / 6.0;
   
   //kvapil begin
   // Distance between v12 and v23
@@ -123,28 +123,28 @@ StHFTriplet::StHFTriplet(StPicoTrack const * const particle1, StPicoTrack const 
 
   // -- constructing mother daughter four momentum. Need helix (not straight line) for each daughter
   double const p1AtV0 = p1Helix.pathLength( mDecayVertex );
-  StThreeVectorF const p1MomAtDca = p1Helix.momentumAt(p1AtV0 ,  bField * kilogauss);
+    TVector3 const p1MomAtDca = p1Helix.momentumAt(p1AtV0 ,  bField * kilogauss);
 
   double const p2AtV0 = p2Helix.pathLength( mDecayVertex );
-  StThreeVectorF const p2MomAtDca = p2Helix.momentumAt(p2AtV0 ,  bField * kilogauss);
+    TVector3 const p2MomAtDca = p2Helix.momentumAt(p2AtV0 ,  bField * kilogauss);
   
   double const p3AtV0 = p3Helix.pathLength( mDecayVertex );
-  StThreeVectorF const p3MomAtDca = p3Helix.momentumAt(p3AtV0 ,  bField * kilogauss);
-  
-  StLorentzVectorF const p1FourMom(p1MomAtDca, p1MomAtDca.massHypothesis(p1MassHypo));
-  StLorentzVectorF const p2FourMom(p2MomAtDca, p2MomAtDca.massHypothesis(p2MassHypo));
-  StLorentzVectorF const p3FourMom(p3MomAtDca, p3MomAtDca.massHypothesis(p3MassHypo));
+    TVector3 const p3MomAtDca = p3Helix.momentumAt(p3AtV0 ,  bField * kilogauss);
+
+    TLorentzVector const p1FourMom(p1MomAtDca, p1MomAtDca.massHypothesis(p1MassHypo));
+    TLorentzVector const p2FourMom(p2MomAtDca, p2MomAtDca.massHypothesis(p2MassHypo));
+    TLorentzVector const p3FourMom(p3MomAtDca, p3MomAtDca.massHypothesis(p3MassHypo));
   
   mLorentzVector = p1FourMom + p2FourMom + p3FourMom;
    
   // -- calculate cosThetaStar
   //    ->> Lomnitz: Need to rethink theta star
-  StLorentzVectorF const tripletFourMomReverse(-mLorentzVector.px(), -mLorentzVector.py(), -mLorentzVector.pz(), mLorentzVector.e());
-  StLorentzVectorF const p1FourMomStar = p1FourMom.boost(tripletFourMomReverse);
+    TLorentzVector const tripletFourMomReverse(-mLorentzVector.px(), -mLorentzVector.py(), -mLorentzVector.pz(), mLorentzVector.e());
+    TLorentzVector const p1FourMomStar = p1FourMom.boost(tripletFourMomReverse);
   mCosThetaStar = std::cos(p1FourMomStar.vect().angle(mLorentzVector.vect()));
   
   // -- calculate pointing angle and decay length
-  StThreeVectorF const vtxToV0 = mDecayVertex - vtx;
+    TVector3 const vtxToV0 = mDecayVertex - vtx;
   mPointingAngle = vtxToV0.angle(mLorentzVector.vect());
   mDecayLength = vtxToV0.mag();
 
