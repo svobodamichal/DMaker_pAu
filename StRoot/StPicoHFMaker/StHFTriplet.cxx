@@ -10,7 +10,7 @@
 ClassImp(StHFTriplet)
 
 // _________________________________________________________
-StHFTriplet::StHFTriplet(): mLorentzVector(StLorentzVectorF()), mDecayVertex(TVector3()),
+StHFTriplet::StHFTriplet(): mLorentzVector(TLorentzVector()), mDecayVertex(TVector3()),
   mPointingAngle(std::numeric_limits<float>::quiet_NaN()), mDecayLength(std::numeric_limits<float>::quiet_NaN()),
   mParticle1Dca(std::numeric_limits<float>::quiet_NaN()), mParticle2Dca(std::numeric_limits<float>::quiet_NaN()), 
   mParticle3Dca(std::numeric_limits<float>::quiet_NaN()),
@@ -105,7 +105,7 @@ StHFTriplet::StHFTriplet(StPicoTrack const * const particle1, StPicoTrack const 
   mDcaDaughters31 = (p3AtDcaToP1 - p1AtDcaToP3).Mag();
   
   // -- calculate decay vertex (secondary)
-    TVector3 mDecayVertex = ( p1AtDcaToP2 + p2AtDcaToP1 + p2AtDcaToP3 + p3AtDcaToP2 + p3AtDcaToP1 + p1AtDcaToP3 ) / 6.0;
+  mDecayVertex = (p1AtDcaToP2 + p2AtDcaToP1 + p2AtDcaToP3 + p3AtDcaToP2 + p3AtDcaToP1 + p1AtDcaToP3)/6.0;
   
   //kvapil begin
   // Distance between v12 and v23
@@ -153,7 +153,7 @@ StHFTriplet::StHFTriplet(StPicoTrack const * const particle1, StPicoTrack const 
     p2FourMomStar.Boost(beta);
     p3FourMomStar.Boost(beta);
 
-    
+
     mCosThetaStar = cos(p2FourMomStar.Vect().Angle(mLorentzVector.Vect()));
 
 
