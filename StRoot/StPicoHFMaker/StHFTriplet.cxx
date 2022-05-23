@@ -132,18 +132,33 @@ StHFTriplet::StHFTriplet(StPicoTrack const * const particle1, StPicoTrack const 
   double const p3AtV0 = p3Helix.pathLength( mDecayVertex );
     TVector3 const p3MomAtDca = p3Helix.momentumAt(p3AtV0 ,  bField * kilogauss);
 
-    TLorentzVector const p1FourMom(p1MomAtDca, p1MomAtDca.massHypothesis(p1MassHypo));
-    TLorentzVector const p2FourMom(p2MomAtDca, p2MomAtDca.massHypothesis(p2MassHypo));
-    TLorentzVector const p3FourMom(p3MomAtDca, p3MomAtDca.massHypothesis(p3MassHypo));
-  
-  mLorentzVector = p1FourMom + p2FourMom + p3FourMom;
+    TLorentzVector const p1FourMom(p1MomAtDca, sqrt(p1MomAtDca*p1MomAtDca+p1MassHypo*p1MassHypo));
+    TLorentzVector const p2FourMom(p2MomAtDca, sqrt(p2MomAtDca*p2MomAtDca+p2MassHypo*p2MassHypo));
+    TLorentzVector const p3FourMom(p3MomAtDca, sqrt(p3MomAtDca*p3MomAtDca+p3MassHypo*p3MassHypo));
+
+
+    mLorentzVector = p1FourMom + p2FourMom + p3FourMom;
    
   // -- calculate cosThetaStar
   //    ->> Lomnitz: Need to rethink theta star
-    TLorentzVector const tripletFourMomReverse(-mLorentzVector.Px(), -mLorentzVector.Py(), -mLorentzVector.Pz(), mLorentzVector.E());
-    TLorentzVector const p1FourMomStar = p1FourMom.Boost(tripletFourMomReverse);
-  mCosThetaStar = std::cos(p1FourMomStar.Vect().angle(mLorentzVector.Vect()));
-  
+    TLorentzVector tripletFourMomReverse;
+    tripletFourMomReverse.SetPxPyPzE(-mLorentzVector.Px(), -mLorentzVector.Py(), -mLorentzVector.Pz(), mLorentzVector.E());
+
+    TLorentzVector p1FourMomStar = p1FourMom;
+    TLorentzVector p2FourMomStar = p2FourMom;
+    TLorentzVector p3FourMomStar = p3FourMom;
+
+    TVector3 beta = tripletFourMomReverse.BoostVector();
+    p1FourMomStar.Boost(beta);
+    p2FourMomStar.Boost(beta);
+    p3FourMomStar.Boost(beta);
+
+    
+    mCosThetaStar = cos(p2FourMomStar.Vect().Angle(mLorentzVector.Vect()));
+
+
+
+
   // -- calculate pointing angle and decay length
     TVector3 const vtxToV0 = mDecayVertex - vtx;
   mPointingAngle = vtxToV0.Angle(mLorentzVector.Vect());
