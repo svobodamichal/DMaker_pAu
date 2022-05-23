@@ -105,7 +105,7 @@ StHFTriplet::StHFTriplet(StPicoTrack const * const particle1, StPicoTrack const 
   mDcaDaughters31 = (p3AtDcaToP1 - p1AtDcaToP3).Mag();
   
   // -- calculate decay vertex (secondary)
-  mDecayVertex = (p1AtDcaToP2 + p2AtDcaToP1 + p2AtDcaToP3 + p3AtDcaToP2 + p3AtDcaToP1 + p1AtDcaToP3)/6.0;
+  mDecayVertex = (p1AtDcaToP2 + p2AtDcaToP1 + p2AtDcaToP3 + p3AtDcaToP2 + p3AtDcaToP1 + p1AtDcaToP3)*1.6666666;
   
   //kvapil begin
   // Distance between v12 and v23
