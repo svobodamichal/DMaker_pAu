@@ -357,10 +357,9 @@ int StPicoD0AnaMaker::createCandidates() {
                 StPicoTrack *pion2 = mPicoDst->track(mIdxPicoPions[idxPion2]);
                 if (mIdxPicoKaons[idxKaon] == mIdxPicoPions[idxPion1]|| mIdxPicoKaons[idxKaon] == mIdxPicoPions[idxPion2] || mIdxPicoPions[idxPion1] == mIdxPicoPions[idxPion2]) continue;
 
-                StHFTriplet triplet(pion1,kaon,pion2,mHFCuts->getHypotheticalMass(StHFCuts::kPion),mHFCuts->getHypotheticalMass(StHFCuts::kKaon),mHFCuts->getHypotheticalMass(StHFCuts::kPion), mIdxPicoPions[idxPion1],mIdxPicoKaons[idxKaon],mIdxPicoPions[idxPion2], mPrimVtx, mBField);
+                StHFTriplet *triplet= new StHFTriplet(pion1,kaon,pion2,mHFCuts->getHypotheticalMass(StHFCuts::kPion),mHFCuts->getHypotheticalMass(StHFCuts::kKaon),mHFCuts->getHypotheticalMass(StHFCuts::kPion), mIdxPicoPions[idxPion1],mIdxPicoKaons[idxKaon],mIdxPicoPions[idxPion2], mPrimVtx, mBField);
 
 
-                if (!mHFCuts->isGoodSecondaryVertexPair(triplet)) continue;
 
                 bool isDstar = false;
                 if((kaon->charge() + pion1->charge() == 0)&&(pion1->charge() == pion2->charge()) ) isDstar=true;
@@ -391,7 +390,7 @@ int StPicoD0AnaMaker::createCandidates() {
 
                 ntVar2[iii++] = pion1->gPt();
                 ntVar2[iii++] = pion1->gPtot();
-                ntVar2[iii++] = triplet->particle1Dca();
+                ntVar2[iii++] = triplet->mParticle1Dca();
                 ntVar2[iii++] = pion1->nSigmaPion();
                 ntVar2[iii++] = pion1->nHitsFit();
                 ntVar2[iii++] = mHFCuts->getOneOverBeta(pion1, mHFCuts->getTofBetaBase(pion1), StPicoCutsBase::kPion);
@@ -399,7 +398,7 @@ int StPicoD0AnaMaker::createCandidates() {
 
                 ntVar2[iii++] = kaon->gPt();
                 ntVar2[iii++] = kaon->gPtot();
-                ntVar2[iii++] = triplet->particle2Dca();
+                ntVar2[iii++] = triplet->mParticle2Dca();
                 ntVar2[iii++] = kaon->nSigmaKaon();
                 ntVar2[iii++] = kaon->nHitsFit();
                 ntVar2[iii++] = mHFCuts->getOneOverBeta(kaon, mHFCuts->getTofBetaBase(kaon), StPicoCutsBase::kKaon);
@@ -407,7 +406,7 @@ int StPicoD0AnaMaker::createCandidates() {
 
                 ntVar2[iii++] = pion2->gPt();
                 ntVar2[iii++] = pion2->gPtot();
-                ntVar2[iii++] = triplet->particle3Dca();
+                ntVar2[iii++] = triplet->mParticle3Dca();
                 ntVar2[iii++] = pion2->nSigmaPion();
                 ntVar2[iii++] = pion2->nHitsFit();
                 ntVar2[iii++] = mHFCuts->getOneOverBeta(pion2, mHFCuts->getTofBetaBase(pion2), StPicoCutsBase::kPion);
