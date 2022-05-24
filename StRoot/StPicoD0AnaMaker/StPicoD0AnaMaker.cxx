@@ -228,7 +228,6 @@ int StPicoD0AnaMaker::MakeHF() {
 
 // _________________________________________________________
 int StPicoD0AnaMaker::createCandidates() {
-    cout<<"Test 0.0"<<endl;
     //make it run faster:
  //   if (!(mPicoEvent->BBCx()<950000)) return kStOK;
     nGoodTracks=0;
@@ -248,7 +247,6 @@ int StPicoD0AnaMaker::createCandidates() {
     TH1F *hNTracksGoodToFit = static_cast<TH1F*>(mOutList->FindObject("hNTracksGoodToFit"));
 
     UInt_t nTracks = mPicoDst->numberOfTracks();
-    cout<<"Test 0.01"<<endl;
 
     Int_t nD0 = 0;
     Int_t nDstar = 0;
@@ -257,12 +255,13 @@ int StPicoD0AnaMaker::createCandidates() {
     for (unsigned short iTrack = 0; iTrack < nTracks; ++iTrack) {
         StPicoTrack* trk = mPicoDst->track(iTrack);
         cout<<"Test 0.02"<<endl;
+        cout<<nTracks<<endl;
         if (abs(trk->gMom().PseudoRapidity())>1) continue;
 
         TVector3 pMom = trk->pMom();
-        cout << pMom.Mag() << endl;
+      //  cout << pMom.Mag() << endl;
 
-        
+
         if (trk->isPrimary()) {
             cout<<"Test 0.03"<<endl;
 
