@@ -259,6 +259,10 @@ int StPicoD0AnaMaker::createCandidates() {
         cout<<"Test 0.02"<<endl;
         if (abs(trk->gMom().PseudoRapidity())>1) continue;
 
+        TVector3 pMom = trk->pMom();
+        cout << pMom.Mag() << endl;
+
+        
         if (trk->isPrimary()) {
             cout<<"Test 0.03"<<endl;
 
