@@ -283,24 +283,32 @@ int StPicoD0AnaMaker::createCandidates() {
 //        }
 
     for (unsigned short idxPion1 = 0; idxPion1 < mIdxPicoPions.size(); ++idxPion1) {
+        cout<<"Test 0"<<endl;
         StPicoTrack *pion1 = mPicoDst->track(mIdxPicoPions[idxPion1]);
         for (unsigned short idxKaon = 0; idxKaon < mIdxPicoKaons.size(); ++idxKaon) {
+            cout<<"Test 0.1"<<endl;
             if ( mIdxPicoKaons[idxKaon] == mIdxPicoPions[idxPion1] ) continue;
+            cout<<"Test 0.2"<<endl;
             StPicoTrack *kaon = mPicoDst->track(mIdxPicoKaons[idxKaon]);
             StHFPair *pair = new StHFPair(pion1, kaon, mHFCuts->getHypotheticalMass(StPicoCutsBase::kPion),mHFCuts->getHypotheticalMass(StPicoCutsBase::kKaon), mIdxPicoPions[idxPion1],mIdxPicoKaons[idxKaon], useVertex, mBField, kTRUE);
 
+            cout<<"Test 0.3"<<endl;
             if (!mHFCuts->isGoodSecondaryVertexPair(pair)) continue;
 
+            cout<<"Test 0.4"<<endl;
             bool isD0 = false;
             if((kaon->charge() + pion1->charge() == 0) ) isD0=true;
 
+            cout<<"Test 0.5"<<endl;
             Float_t primary = 0;
             if (pion1->isPrimary()) primary = 3;
             if (kaon->isPrimary()) primary = 4;
             if (pion1->isPrimary() && kaon->isPrimary()) primary = 2;
 
+            cout<<"Test 0.6"<<endl;
             Float_t hotSpot=0;
             if (mHFCuts->checkHotSpot(&mPrimVtx)) hotSpot=1;
+            cout<<"Test 0.7"<<endl;
 
             const int nNtVars = ntp_DMeson_Signal->GetNvar();
             float ntVar[nNtVars];
