@@ -228,7 +228,7 @@ int StPicoD0AnaMaker::MakeHF() {
 
 // _________________________________________________________
 int StPicoD0AnaMaker::createCandidates() {
-    cout<<"Test 0.0"<<endl
+    cout<<"Test 0.0"<<endl;
     //make it run faster:
  //   if (!(mPicoEvent->BBCx()<950000)) return kStOK;
     nGoodTracks=0;
@@ -248,7 +248,7 @@ int StPicoD0AnaMaker::createCandidates() {
     TH1F *hNTracksGoodToFit = static_cast<TH1F*>(mOutList->FindObject("hNTracksGoodToFit"));
 
     UInt_t nTracks = mPicoDst->numberOfTracks();
-    cout<<"Test 0.01"<<endl
+    cout<<"Test 0.01"<<endl;
 
     Int_t nD0 = 0;
     Int_t nDstar = 0;
@@ -256,11 +256,11 @@ int StPicoD0AnaMaker::createCandidates() {
 
     for (unsigned short iTrack = 0; iTrack < nTracks; ++iTrack) {
         StPicoTrack* trk = mPicoDst->track(iTrack);
-        cout<<"Test 0.02"<<endl
+        cout<<"Test 0.02"<<endl;
         if (abs(trk->gMom().PseudoRapidity())>1) continue;
 
         if (trk->isPrimary()) {
-            cout<<"Test 0.03"<<endl
+            cout<<"Test 0.03"<<endl;
 
             nPrimary++;
             primaryTracks.push_back(iTrack);
@@ -269,13 +269,13 @@ int StPicoD0AnaMaker::createCandidates() {
             if (mHFCuts->isGoodPion(trk)) {
                 mIdxPicoPions.push_back(iTrack);
                 hPionPt->Fill(trk->gPt());
-                cout<<"Test 0.04"<<endl
+                cout<<"Test 0.04"<<endl;
 
             }
             if (mHFCuts->isGoodKaon(trk)){
                 mIdxPicoKaons.push_back(iTrack);
                 hKaonPt->Fill(trk->gPt());
-                cout<<"Test 0.05"<<endl
+                cout<<"Test 0.05"<<endl;
 
             }
         }
@@ -283,7 +283,7 @@ int StPicoD0AnaMaker::createCandidates() {
 
     TVector3 useVertex(mPrimVtx.x(), mPrimVtx.y(), mPrimVtx.z());
     if (mSwitchRefit) useVertex=refitVertex(true);
-    cout<<"Test 0.06"<<endl
+    cout<<"Test 0.06"<<endl;
 
 //        if (tracksToRemove.size()==nPrimary) {
 //            cout<<useVertex.x()<<" "<<useVertex.y()<<" "<<useVertex.z()<<endl;
