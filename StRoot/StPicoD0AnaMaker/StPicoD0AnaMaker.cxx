@@ -259,6 +259,9 @@ int StPicoD0AnaMaker::createCandidates() {
         TVector3 gMom = trk->gMom();
         cout <<"gMom "<< gMom.Mag() << endl;
 
+        trk->Print();
+
+
         if (abs(trk->gMom().PseudoRapidity())>1) continue;
 
         TVector3 pMom = trk->pMom();
