@@ -255,7 +255,10 @@ int StPicoD0AnaMaker::createCandidates() {
     for (unsigned short iTrack = 0; iTrack < nTracks; ++iTrack) {
         StPicoTrack* trk = mPicoDst->track(iTrack);
         cout<<"Test 0.02"<<endl;
-        cout<<nTracks<<endl;
+        cout<<"Pocet tracku "<<nTracks<<endl;
+        TVector3 gMom = trk->gMom();
+        cout <<"gMom "<< gMom.Mag() << endl;
+
         if (abs(trk->gMom().PseudoRapidity())>1) continue;
 
         TVector3 pMom = trk->pMom();
