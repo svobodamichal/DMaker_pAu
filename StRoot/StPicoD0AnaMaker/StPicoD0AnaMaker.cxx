@@ -10,6 +10,8 @@
 
 ClassImp(StPicoD0AnaMaker)
 
+using namespace std;
+
 const int nptBins=3;
 //float const bdtCuts[nptBins] = {0.36, 0.3, 0.29}; //original CM
 float const bdtCuts[nptBins] = {0.46, 0.4, 0.39};
@@ -304,6 +306,8 @@ int StPicoD0AnaMaker::createCandidates() {
             float ntVar[nNtVars];
             int ii=0;
 
+            cout<<"Test 1"<<endl;
+
             ntVar[ii++] = mPicoEvent->grefMult();
             ntVar[ii++] = mPicoEvent->refMult();
             ntVar[ii++] = mPicoEvent->runId();
@@ -344,8 +348,13 @@ int StPicoD0AnaMaker::createCandidates() {
             ntVar[ii++] = pair->pt();
             ntVar[ii++] = pair->m();
 
+            cout<<"Test 2"<<endl;
+
+
             if (isD0) {
                 ntp_DMeson_Signal->Fill(ntVar);
+                cout<<"Test 3"<<endl;
+
                 nD0++;
             } else {
                 ntp_DMeson_Background->Fill(ntVar);
@@ -360,6 +369,8 @@ int StPicoD0AnaMaker::createCandidates() {
                 StHFTriplet *triplet= new StHFTriplet(pion1,kaon,pion2,mHFCuts->getHypotheticalMass(StHFCuts::kPion),mHFCuts->getHypotheticalMass(StHFCuts::kKaon),mHFCuts->getHypotheticalMass(StHFCuts::kPion), mIdxPicoPions[idxPion1],mIdxPicoKaons[idxKaon],mIdxPicoPions[idxPion2], mPrimVtx, mBField);
 
 
+
+                cout<<"Test 4"<<endl;
 
                 bool isDstar = false;
                 if((kaon->charge() + pion1->charge() == 0)&&(pion1->charge() == pion2->charge()) ) isDstar=true;
@@ -423,8 +434,12 @@ int StPicoD0AnaMaker::createCandidates() {
                 ntVar2[iii++] = triplet->pt();
                 ntVar2[iii++] = triplet->m();
 
+                cout<<"Test 5"<<endl;
+
                 if (isDstar) {
                     ntp_DstarMeson_Signal->Fill(ntVar2);
+                    cout<<"Test 6"<<endl;
+
                     nDstar++;
                 } else {
                     ntp_DstarMeson_Background->Fill(ntVar2);
