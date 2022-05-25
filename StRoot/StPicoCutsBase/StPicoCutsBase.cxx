@@ -121,6 +121,7 @@ void StPicoCutsBase::initBase() {
     if (runs.is_open()) {
         Int_t runId = 0;
         while( runs >> runId )
+            cout << "Run ID " <<runId<<endl;
             mVecBadRunList.push_back(runId);
 
         runs.close();
