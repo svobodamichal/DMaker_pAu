@@ -94,7 +94,7 @@ int StPicoD0AnaMaker::InitHF() {
     mOutFileBaseName = mOutFileBaseName.ReplaceAll(".root", "");
     TString ntpVars = "grefMult:refMult:runId:eventId:ZDC:BBC:hotSpot:primary:diffRemovedPrimary:pi1_pt:pi1_p:pi1_dca:pi1_nSigma:pi1_nHitFit:pi1_TOFinvbeta:pi1_betaBase:k_pt:k_p:k_dca:k_nSigma:k_nHitFit:k_TOFinvbeta:k_betaBase:dcaDaughters:primVz:primVzVpd:D_theta:cosTheta:D_decayL:dcaD0ToPv:D_cosThetaStar"
                       ":D_pt:D_mass";
-    TString ntpVars2 = "grefMult:refMult:runId:eventId:ZDC:BBC:hotSpot:primary:diffRemovedPrimary:pi1_pt:pi1_p:pi1_dca:pi1_nSigma:pi1_nHitFit:pi1_TOFinvbeta:pi1_betaBase:k_pt:k_p:k_dca:k_nSigma:k_nHitFit:k_TOFinvbeta:k_betaBase:pi2_pt:pi2_p:pi2_dca:pi2_nSigma:pi2_nHitFit:pi2_TOFinvbeta:pi2_betaBase:primVz:primVzVpd"
+    TString ntpVars2 = "grefMult:refMult:runId:eventId:ZDC:BBC:hotSpot:primary:diffRemovedPrimary:pi1_pt:pi1_p:pi1_nSigma:pi1_nHitFit:pi1_TOFinvbeta:pi1_betaBase:k_pt:k_p:k_nSigma:k_nHitFit:k_TOFinvbeta:k_betaBase:pi2_pt:pi2_p:pi2_nSigma:pi2_nHitFit:pi2_TOFinvbeta:pi2_betaBase:primVz:primVzVpd"
                       ":Dstar_pt:Dstar_mass";
 
 //    ntp_kaon = new TNtuple("ntp_kaon", "kaon tree","k_pt:k_phi:k_eta:k_nSigma:k_nHitFit:k_TOFinvbeta:pi_eventId:pi_runId");
