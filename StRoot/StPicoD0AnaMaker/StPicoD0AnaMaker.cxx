@@ -95,7 +95,7 @@ int StPicoD0AnaMaker::InitHF() {
     TString ntpVars = "grefMult:refMult:runId:eventId:ZDC:BBC:hotSpot:primary:diffRemovedPrimary:pi1_pt:pi1_p:pi1_dca:pi1_nSigma:pi1_nHitFit:pi1_TOFinvbeta:pi1_betaBase:k_pt:k_p:k_dca:k_nSigma:k_nHitFit:k_TOFinvbeta:k_betaBase:dcaDaughters:primVz:primVzVpd:D_theta:cosTheta:D_decayL:dcaD0ToPv:D_cosThetaStar"
                       ":D_pt:D_mass";
     TString ntpVars2 = "grefMult:refMult:runId:eventId:ZDC:BBC:hotSpot:primary:diffRemovedPrimary:pi1_pt:pi1_p:pi1_nSigma:pi1_nHitFit:pi1_TOFinvbeta:pi1_betaBase:k_pt:k_p:k_nSigma:k_nHitFit:k_TOFinvbeta:k_betaBase:pi2_pt:pi2_p:pi2_nSigma:pi2_nHitFit:pi2_TOFinvbeta:pi2_betaBase:primVz:primVzVpd"
-                      ":Dstar_pt:Dstar_mass";
+                      ":Dstar_pt:Dstar_mass:triplet_pair";
 
 //    ntp_kaon = new TNtuple("ntp_kaon", "kaon tree","k_pt:k_phi:k_eta:k_nSigma:k_nHitFit:k_TOFinvbeta:pi_eventId:pi_runId");
 //    ntp_pion = new TNtuple("ntp_pion", "pion tree","pi_pt:pi_phi:pi_eta:pi_nSigma:pi_nHitFit:pi_TOFinvbeta:k_eventId:k_runId");
@@ -314,6 +314,8 @@ int StPicoD0AnaMaker::createCandidates() {
             Float_t hotSpot=0;
             if (mHFCuts->checkHotSpot(&mPrimVtx)) hotSpot=1;
 
+            float pairM = pair->m();
+
             const int nNtVars = ntp_DMeson_Signal->GetNvar();
             float ntVar[nNtVars];
             int ii=0;
@@ -389,6 +391,9 @@ int StPicoD0AnaMaker::createCandidates() {
                 Float_t hotSpot2=0;
                 if (mHFCuts->checkHotSpot(&mPrimVtx)) hotSpot2=1;
 
+                float tripletM = triplet->();
+                float triplet_pair = tripletM-pairM;
+
                 const int nNtVars2 = ntp_DstarMeson_Signal->GetNvar();
                 float ntVar2[nNtVars2];
                 int iii=0;
@@ -438,6 +443,7 @@ int StPicoD0AnaMaker::createCandidates() {
 
                 ntVar2[iii++] = triplet->pt();
                 ntVar2[iii++] = triplet->m();
+                ntVar2[iii++] = triplet_pair;
 
                 if (isDstar) {
                     ntp_DstarMeson_Signal->Fill(ntVar2);
