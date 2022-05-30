@@ -461,7 +461,7 @@ int StPicoD0AnaMaker::createCandidates() {
                 }  //  for (unsigned short idxPion2 = idxPion1+1; idxPion2 < mIdxPicoPions.size(); ++idxPion2)
 
             }  // if((pairM>1.84) && (pairM < 1.89))
-            else{continue}
+            else{continue;}
         }  // for (unsigned short idxKaon = 0; idxKaon < mIdxPicoKaons.size(); ++idxKaon)
     } // for (unsigned short idxPion1 = 0; idxPion1 < mIdxPicoPions.size(); ++idxPion1)
 
