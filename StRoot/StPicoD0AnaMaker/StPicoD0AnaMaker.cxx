@@ -397,7 +397,8 @@ int StPicoD0AnaMaker::createCandidates() {
                     if (mHFCuts->checkHotSpot(&mPrimVtx)) hotSpot2 = 1;
 
                     float tripletM = triplet->m();
-                    float triplet_pair = tripletM - pairM;
+                    float tripletMS = tripletM*0.333333333333333333333333333
+                    float triplet_pair = tripletMS - pairM;
 
                     const int nNtVars2 = ntp_DstarMeson_Signal->GetNvar();
                     float ntVar2[nNtVars2];
