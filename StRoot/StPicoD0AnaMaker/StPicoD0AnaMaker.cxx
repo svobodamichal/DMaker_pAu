@@ -397,8 +397,7 @@ int StPicoD0AnaMaker::createCandidates() {
                     if (mHFCuts->checkHotSpot(&mPrimVtx)) hotSpot2 = 1;
 
                     float tripletM = triplet->m();
-                    float tripletMS = tripletM*0.333333333333333333333333333;
-                    float triplet_pair = tripletMS - pairM;
+                    float triplet_pair = tripletM - pairM;
 
                     const int nNtVars2 = ntp_DstarMeson_Signal->GetNvar();
                     float ntVar2[nNtVars2];
@@ -444,7 +443,8 @@ int StPicoD0AnaMaker::createCandidates() {
                 //  ntVar2[iii++] = pair->pointingAngle();
                 //  ntVar2[iii++] = cos(pair->pointingAngle());
                 //  ntVar2[iii++] = pair->decayLength();
-                //  ntVar2[iii++] = triplet->DcaToPrimaryVertex(); //(pair->decayLength())*sin(pair->pointingAngle());
+                //  ntVar2[iii++] = triplet->DcaToPrimaryVertex();
+                // (pair->decayLength())*sin(pair->pointingAngle());
                 //  ntVar2[iii++] = pair->cosThetaStar();
 
                     ntVar2[iii++] = triplet->pt();
