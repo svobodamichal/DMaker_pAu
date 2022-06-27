@@ -15,26 +15,28 @@
 #include "StPicoD0AnaMaker/StPicoD0AnaMaker.h"
 using namespace std;
 
-
 void runPicoMixedEvent(
-        const char*  inputFile,
-        const Char_t *outputFile,
-        const Char_t *badRunListFileName) {
-    string SL_version = "SL18f";
-    string env_SL = getenv ("STAR");
-    if (env_SL.find(SL_version)==string::npos) {
-        cout<<"Environment Star Library does not match the requested library in run**.C. Exiting..."<<endl;
-        exit(1);
-    }
+			const Char_t *inputFile="./picoLists/runs_local_test.list",
+			const Char_t *outputFile="outputLocal",
+			const Char_t *badRunListFileName = "./picoLists/picoList_bad.list") {
 
-    StChain *chain = new StChain();
-    TString sInputFile(inputFile);
+  string SL_version = "SL18f";
+  string env_SL = getenv ("STAR");
+  if (env_SL.find(SL_version)==string::npos) {
+      cout<<"Environment Star Library does not match the requested library in runPicoHFMyAnaMaker.C. Exiting..."<<endl;
+      exit(1);
+  }
+  
+  gROOT->LoadMacro("loadSharedHFLibraries.C");
+  loadSharedHFLibraries();
+  StChain *chain = new StChain();
 
-    if (!sInputFile.Contains(".list") && !sInputFile.Contains("picoDst.root")) {
-        cout << "No input list or picoDst root file provided! Exiting..." << endl;
-        exit(1);
-    }
+  TString sInputFile(inputFile);
 
+  if (!sInputFile.Contains(".list") && !sInputFile.Contains("picoDst.root")) {
+    cout << "No input list or picoDst root file provided! Exiting..." << endl;
+    exit(1);
+  }
 
   StHFCuts* hfCuts = new StHFCuts("hfBaseCuts");
 
@@ -65,12 +67,12 @@ void runPicoMixedEvent(
     hfCuts->setHybridTofBetterBetaCuts(true); // Turns on functional 1/beta cuts
 
 
-    float dcaDaughtersMax = 10.;  // maximum toto ide
-    float decayLengthMin  = 0.00000001; // minimum
+    float dcaDaughtersMax = 0.5;  // maximum toto ide
+    float decayLengthMin  = 0.009; // minimum
     float decayLengthMax  = 999.;  //std::numeric_limits<float>::max(); toto ide (cutuje)
-    float cosThetaMin     = 0.;   // minimum
-    float minMass         = 0.1;
-    float maxMass         = 3.5;
+    float cosThetaMin     = 0.5;   // minimum
+    float minMass         = 0.5;
+    float maxMass         = 2.5;
     float pairDcaMax      = 99.9;
 
 
