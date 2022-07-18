@@ -86,7 +86,7 @@ void runPicoMixedEventLocal(
   clock_t start = clock(); // getting starting time
   chain->Init();
   Int_t nEvents = picoDstMaker->chain()->GetEntries();
-  cout << "Pokus, kde Total entries = " << nEvents << endl;
+  cout << "Total entries = " << nEvents << endl;
 
   for (Int_t i=0; i<nEvents; ++i) {
 //    if(i%10==0)       cout << "Working on eventNumber " << i << endl;

@@ -49,25 +49,37 @@ void StPicoEventMixer::finish() {
 }
 //-----------------------------------------------------------
 bool StPicoEventMixer::addPicoEvent(StPicoDst const* const picoDst, float weight) {
+    cout << "Testík 1" <<endl;
     unsigned int nTracks = picoDst->numberOfTracks();
+    cout << "Testík 2" <<endl;
+
     TVector3 pVertex = picoDst->event()->primaryVertex();
+    cout << "Testík 3" <<endl;
+
     StMixerEvent* event = new StMixerEvent(pVertex, picoDst->event()->bField());
+    cout << "Testík 4" <<endl;
+
     event->addPicoEvent(*(picoDst->event()));
+    cout << "Testík 5" <<endl;
 
     for(unsigned int iTrk = 0; iTrk < nTracks; ++iTrk) {
         StPicoTrack const* trk = picoDst->track(iTrk);
         bool saveTrack = false;
 
+        cout << "Testík 6" <<endl;
+
         if(mHFCuts->isGoodPion(trk)) {
             saveTrack = true;
             event->addPion(event->getNoTracks());
         }
+        cout << "Testík 7" <<endl;
 
         if(mHFCuts->isGoodKaon(trk)) {
             saveTrack = true;
             event->addKaon(event->getNoTracks());
 //            cout<<mHFCuts->getOneOverBeta(trk, mHFCuts->getTofBetaBase(trk), StPicoCutsBase::kKaon)<<endl;
         }
+        cout << "Testík 8" <<endl;
 
         if(saveTrack){
             event->addTrack(*trk);
