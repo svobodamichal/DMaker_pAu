@@ -97,12 +97,16 @@ void StPicoEventMixer::mixEvents() {
 
 
     size_t const nEvent = mEvents.size();
+    cout << "Pocet tracku" <<nEvent<<endl;
+
     int const nTracksEvt1 = mEvents.at(0)->getNoPions();
+    cout << "Pocet pionu" <<nTracksEvt1<<endl;
 
 
     // Go through the event buffer
     for( size_t iEvt2 = 0; iEvt2 < nEvent; ++iEvt2) {
         int const nTracksEvt2 = mEvents.at(iEvt2)->getNoKaons();
+        cout << "Pocet kaonu" <<nTracksEvt2<<endl;
 
         // evts trk loops
         for(int iTrk1 = 0; iTrk1 < nTracksEvt1; ++iTrk1) { //pions
