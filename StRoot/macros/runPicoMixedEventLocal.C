@@ -15,7 +15,7 @@
 #include "StPicoD0AnaMaker/StPicoD0AnaMaker.h"
 using namespace std;
 
-void runPicoMixedEvent(
+void runPicoMixedEventLocal(
 			const Char_t *inputFile="./picoLists/runs_local_test.list",
 			const Char_t *outputFile="outputLocal",
 			const Char_t *badRunListFileName = "./picoLists/picoList_bad.list") {
