@@ -69,8 +69,14 @@ bool StPicoEventMixer::addPicoEvent(StPicoDst const* const picoDst, float weight
         cout << "Testík 6" <<endl;
 
         if(mHFCuts->isGoodPion(trk)) {
+            cout << "Testík 6.1" <<endl;
+
             saveTrack = true;
+            cout << "Testík 6.2" <<endl;
+
             event->addPion(event->getNoTracks());
+            cout << "Testík 6.3" <<endl;
+
         }
         cout << "Testík 7" <<endl;
 
