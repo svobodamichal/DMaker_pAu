@@ -298,6 +298,21 @@ bool StPicoEventMixer::isGoodEvent(StPicoDst const * const picoDst)
 {
     return (mHFCuts->isGoodEvent(picoDst));
 }
+
+
+//-----------------------------------------------------------
+bool StPicoEventMixer::isGoodPion(StPicoTrack const * const trk)
+{
+    return( isGoodPion(trk, StPicoCutsBase::kPion));
+}
+//-----------------------------------------------------------
+bool StPicoEventMixer::isGoodKaon(StPicoTrack const * const trk)
+{
+    return( isGoodKaon(trk, StPicoCutsBase::kKaon));
+}
+
+
+
 //-----------------------------------------------------------
 bool StPicoEventMixer::isTpcPion(StPicoTrack const * const trk)
 {
