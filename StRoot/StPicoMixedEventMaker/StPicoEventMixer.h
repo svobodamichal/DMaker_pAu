@@ -73,8 +73,6 @@ class StPicoEventMixer {
   bool isCloseMixerPair(StMixerPair const * pair) const;
 
 
-  bool isGoodPion(StPicoTrack const * const trk);
-  bool isGoodKaon(StPicoTrack const * const trk);
 
 //  void fillTracks(StMixerEvent* evt, bool isSameEvt, int PidFlag);
   void fillNtpSameEvtPair(float ntVar[], int charge);

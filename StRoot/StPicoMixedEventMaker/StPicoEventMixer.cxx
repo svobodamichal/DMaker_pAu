@@ -16,7 +16,7 @@
 #include "StMixerEvent.h"
 #include "StMixerHists.h"
 #include "StPicoHFMaker/StHFCuts.h"
-#include "StPicoHFMaker/StHFPair.h"
+#include "StPicoCutsBase/StPicoCutsBase.h"
 #include "StMixerPair.h"
 
 
@@ -298,19 +298,6 @@ bool StPicoEventMixer::isGoodEvent(StPicoDst const * const picoDst)
 {
     return (mHFCuts->isGoodEvent(picoDst));
 }
-
-
-//-----------------------------------------------------------
-bool StPicoEventMixer::isGoodPion(StPicoTrack const * const trk)
-{
-    return( isGoodPion(trk, StPicoCutsBase::kPion));
-}
-//-----------------------------------------------------------
-bool StPicoEventMixer::isGoodKaon(StPicoTrack const * const trk)
-{
-    return( isGoodKaon(trk, StPicoCutsBase::kKaon));
-}
-
 
 
 //-----------------------------------------------------------
