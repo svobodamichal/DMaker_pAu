@@ -76,10 +76,7 @@ bool StPicoEventMixer::addPicoEvent(StPicoDst const* const picoDst, float weight
             cout << "Testík 6.1" <<endl;
 
             saveTrack = true;
-            cout << "Testík 6.2" <<endl;
-
             event->addPion(event->getNoTracks());
-            cout << "Testík 6.3" <<endl;
 
         }
         cout << "Testík 7" <<endl;
@@ -98,6 +95,9 @@ bool StPicoEventMixer::addPicoEvent(StPicoDst const* const picoDst, float weight
         } cout << "Test za posledním ifem" << endl;
     }
     cout <<"Poslední cout"<<endl;
+
+    cout <<"Pocet pionu: "<<event->getNoPions()<<"Pocet kaonu: "<< event->getNoKaons()<<endl;
+
     if ( event->getNoPions() > 0 ||  event->getNoKaons() > 0) {
         mEvents.push_back(event);
         filledBuffer+=1;
