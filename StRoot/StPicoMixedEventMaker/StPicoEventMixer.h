@@ -78,7 +78,6 @@ class StPicoEventMixer {
   void fillNtpSameEvtPair(float ntVar[], int charge);
   void fillNtpMixedEvtPair(float ntVar[], int charge);
 
-  std::vector <StMixerEvent*> mEvents;
 //  StMixerHists* mHists;
   StHFCuts *mHFCuts;
   int mEventsBuffer;
@@ -90,6 +89,8 @@ class StPicoEventMixer {
   TNtuple *mSETupleBack;
   TNtuple *mMETupleSig;
   TNtuple *mMETupleBack;
+
+  std::vector <StMixerEvent*> mEvents;
 
     ClassDef(StPicoEventMixer,1)
 

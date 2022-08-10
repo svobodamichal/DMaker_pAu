@@ -66,7 +66,7 @@ bool StPicoEventMixer::addPicoEvent(StPicoDst const* const picoDst, float weight
     StMixerEvent* event = new StMixerEvent(pVertex, picoDst->event()->bField());
     cout << "Testík 4" <<endl;
 
-    event->addPicoEvent(picoDst->event());
+    event->addPicoEvent(*(picoDst->event()));
     cout << "Testík 5" <<endl;
 
     for(unsigned int iTrk = 0; iTrk < nTracks; ++iTrk) {
