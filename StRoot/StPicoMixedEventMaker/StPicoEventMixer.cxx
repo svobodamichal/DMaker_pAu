@@ -22,6 +22,9 @@
 
 using namespace std;
 
+ClassImp(StPicoEventMixer)
+
+
 //-----------------------------------------------------------
 StPicoEventMixer::StPicoEventMixer(char* category):
         mEvents(),
