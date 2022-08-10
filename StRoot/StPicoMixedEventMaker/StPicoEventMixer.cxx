@@ -29,7 +29,7 @@ ClassImp(StPicoEventMixer)
 StPicoEventMixer::StPicoEventMixer(char* category):
 //        mEvents(),
 //        mHists(NULL),
-        mHFCuts(NULL),
+//        mHFCuts(NULL),
 //        mEventsBuffer(5),
 //        filledBuffer(0),
         mSETupleSig(NULL),
@@ -56,17 +56,16 @@ void StPicoEventMixer::finish() {
 
 //-----------------------------------------------------------
 bool StPicoEventMixer::addPicoEvent(StPicoDst const* const picoDst, float weight) {
-    cout << "Testík 1" <<endl;
+
+    if (!mHFCuts){
+        cout<< "Nejsou mHFCuts (addPico)"<<endl;
+        }
     unsigned int nTracks = picoDst->numberOfTracks();
-    cout << "Testík 2" <<endl;
-
     TVector3 pVertex = picoDst->event()->primaryVertex();
-    cout << "Testík 3" <<endl;
-
     StMixerEvent* event = new StMixerEvent(pVertex, picoDst->event()->bField());
-    cout << "Testík 4" <<endl;
-
     event->addPicoEvent(*(picoDst->event()));
+
+
     cout << "Testík 5" <<endl;
 
     for(unsigned int iTrk = 0; iTrk < nTracks; ++iTrk) {

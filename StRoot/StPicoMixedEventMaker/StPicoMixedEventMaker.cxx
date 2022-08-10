@@ -93,8 +93,10 @@ bool StPicoMixedEventMaker::loadEventPlaneCorr(Int_t const run) {
 Int_t StPicoMixedEventMaker::Init() {
 //    mOutputFileTree->cd();
 //    cout<<"init start"<<endl;
-    if (!mHFCuts)
-        mHFCuts = new StHFCuts;
+    if (!mHFCuts){
+
+        cout<< "Nejsou mHFCuts (init)"<<endl;
+        mHFCuts = new StHFCuts;}
     mHFCuts->init();
 
     for(int iVz =0 ; iVz < 10 ; ++iVz){
