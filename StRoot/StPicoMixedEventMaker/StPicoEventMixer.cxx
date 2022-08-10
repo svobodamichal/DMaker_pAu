@@ -104,8 +104,8 @@ bool StPicoEventMixer::addPicoEvent(StPicoDst const* const picoDst, float weight
         cout << "Předposlední if: Filled buffer je " << filledBuffer << " a Event Buffer" << mEventsBuffer <<endl;
 
     }
-    cout << "Mezi ify: Filled buffer je " << filledBuffer <<endl;
     cout << "Event Buffer" << mEventsBuffer <<endl;
+    cout << "Mezi ify: Filled buffer je " << filledBuffer <<endl;
 
 
     //Returns true if need to do mixing, false if buffer has space still
