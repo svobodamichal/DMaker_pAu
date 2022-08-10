@@ -81,8 +81,8 @@ class StPicoEventMixer {
   std::vector <StMixerEvent*> mEvents;
 //  StMixerHists* mHists;
   StHFCuts *mHFCuts;
-  unsigned short int mEventsBuffer; 
-  unsigned short int filledBuffer;
+  int mEventsBuffer;
+  int filledBuffer;
   float dca1, dca2, dcaDaughters, theta_hs, decayL_hs;
   float pt_hs, mass_hs, eta_hs, phi_hs;
 
