@@ -27,8 +27,8 @@ StPicoEventMixer::StPicoEventMixer(char* category):
         mEvents(),
 //        mHists(NULL),
         mHFCuts(NULL),
-        mEventsBuffer(5),
-        filledBuffer(0),
+//        mEventsBuffer(5),
+//        filledBuffer(0),
         mSETupleSig(NULL),
         mSETupleBack(NULL),
         mMETupleSig(NULL),
@@ -96,7 +96,7 @@ bool StPicoEventMixer::addPicoEvent(StPicoDst const* const picoDst, float weight
     }
     cout <<"Poslední cout"<<endl;
 
-    cout <<"Pocet pionu: "<<event->getNoPions()<<"Pocet kaonu: "<< event->getNoKaons()<<endl;
+    cout <<"Pocet pionu: "<<event->getNoPions()<<" Pocet kaonu: "<< event->getNoKaons()<<endl;
 
     if ( event->getNoPions() > 0 ||  event->getNoKaons() > 0) {
         mEvents.push_back(event);
@@ -105,8 +105,8 @@ bool StPicoEventMixer::addPicoEvent(StPicoDst const* const picoDst, float weight
 
     }
     cout << "Tady jsem"<<endl;
-    cout << "Event Buffer" << mEventsBuffer <<endl;
-    cout << "Mezi ify: Filled buffer je " << filledBuffer <<endl;
+    cout << "Event Buffer je " << mEventsBuffer <<endl;
+    cout << "Filled buffer je " << filledBuffer <<endl;
 
 
     //Returns true if need to do mixing, false if buffer has space still
