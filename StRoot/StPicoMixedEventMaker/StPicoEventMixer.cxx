@@ -97,7 +97,7 @@ bool StPicoEventMixer::addPicoEvent(StPicoDst const* const picoDst, float weight
             cout << "Test v posledním ifu"<<endl;
         } cout << "Test za posledním ifem" << endl;
     }
-
+    cout <<"Poslední cout"<<endl;
     if ( event->getNoPions() > 0 ||  event->getNoKaons() > 0) {
         mEvents.push_back(event);
         filledBuffer+=1;
