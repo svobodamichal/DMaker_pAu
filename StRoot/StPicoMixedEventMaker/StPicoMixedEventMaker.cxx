@@ -93,6 +93,10 @@ bool StPicoMixedEventMaker::loadEventPlaneCorr(Int_t const run) {
 Int_t StPicoMixedEventMaker::Init() {
 //    mOutputFileTree->cd();
 //    cout<<"init start"<<endl;
+    if (!mHFCuts)
+        mHFCuts = new StHFCuts;
+    mHFCuts->init();
+
     for(int iVz =0 ; iVz < 10 ; ++iVz){
         for(int iCentrality = 0 ; iCentrality < m_nmultEdge ; ++iCentrality){
             mPicoEventMixer[iVz][iCentrality] = new StPicoEventMixer(Form("Cent_%i_Vz_%i",iCentrality,iVz));
