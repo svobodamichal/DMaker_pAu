@@ -105,9 +105,9 @@ bool StPicoEventMixer::addPicoEvent(StPicoDst const* const picoDst, float weight
 
     }
     dca1 = 12.5;
-    cout<<"Random variable  " dca1<<endl;
+    cout<<"Random variable  " <<dca1<<endl;
 
-    
+
     mEventsBuffer=10;
     filledBuffer=12;
     cout << "Tady jsem"<<endl;
