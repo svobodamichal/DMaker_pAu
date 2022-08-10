@@ -51,7 +51,7 @@ void StPicoEventMixer::finish() {
 //    mHists->closeFile();
 }
 
-StPicoCutsBase* picoCutsBase = new StPicoCutsBase("picoCutsBase");
+//StPicoCutsBase* picoCutsBase = new StPicoCutsBase("picoCutsBase");
 
 
 //-----------------------------------------------------------
@@ -75,7 +75,7 @@ bool StPicoEventMixer::addPicoEvent(StPicoDst const* const picoDst, float weight
 
         cout << "Testík 6" <<endl;
 
-        if(picoCutsBase->isGoodPion(trk)) {
+        if(mHFCuts->isGoodPion(trk)) {
             cout << "Testík 6.1" <<endl;
 
             saveTrack = true;
@@ -84,7 +84,7 @@ bool StPicoEventMixer::addPicoEvent(StPicoDst const* const picoDst, float weight
         }
         cout << "Testík 7" <<endl;
 
-        if(picoCutsBase->isGoodKaon(trk)) {
+        if(mHFCuts->isGoodKaon(trk)) {
             saveTrack = true;
             event->addKaon(event->getNoTracks());
 //            cout<<mHFCuts->getOneOverBeta(trk, mHFCuts->getTofBetaBase(trk), StPicoCutsBase::kKaon)<<endl;
