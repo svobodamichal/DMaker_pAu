@@ -90,6 +90,9 @@ class StPicoEventMixer {
   TNtuple *mSETupleBack;
   TNtuple *mMETupleSig;
   TNtuple *mMETupleBack;
+
+    ClassDef(StPicoEventMixer,1)
+
 };
 
 inline void StPicoEventMixer::setEventBuffer(int buffer){ mEventsBuffer = buffer;}
