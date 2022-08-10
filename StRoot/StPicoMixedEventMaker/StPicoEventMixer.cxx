@@ -27,7 +27,7 @@ ClassImp(StPicoEventMixer)
 
 //-----------------------------------------------------------
 StPicoEventMixer::StPicoEventMixer(char* category):
-        mEvents(),
+//        mEvents(),
 //        mHists(NULL),
         mHFCuts(NULL),
 //        mEventsBuffer(5),
