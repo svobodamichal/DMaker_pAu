@@ -92,8 +92,10 @@ bool StPicoEventMixer::addPicoEvent(StPicoDst const* const picoDst, float weight
         cout << "Testík 8" <<endl;
 
         if(saveTrack){
+            cout << "Test 9"<<endl;
             event->addTrack(*trk);
-        }
+            cout << "Test v posledním ifu"<<endl;
+        } cout << "Test za posledním ifem" << endl;
     }
 
     if ( event->getNoPions() > 0 ||  event->getNoKaons() > 0) {

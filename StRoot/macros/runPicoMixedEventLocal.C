@@ -13,6 +13,8 @@
 #include <ctime>
 #include <cstdio>
 #include "StPicoD0AnaMaker/StPicoD0AnaMaker.h"
+#include "StPicoCutsBase/StPicoCutsBase.h"
+
 using namespace std;
 
 void runPicoMixedEventLocal(
