@@ -7,17 +7,17 @@
 #include "TH1D.h"
 #include "TList.h"
 
-#include "StPicoEventMixer.h"
+#include "StPicoMixedEventMaker/StPicoEventMixer.h"
 #include "StPicoEvent/StPicoEvent.h"
 #include "StPicoEvent/StPicoTrack.h"
 #include "StPicoEvent/StPicoDst.h"
 
-#include "StPicoMixedEventMaker.h"
-#include "StMixerEvent.h"
-#include "StMixerHists.h"
+#include "StPicoMixedEventMaker/StPicoMixedEventMaker.h"
+#include "StPicoMixedEventMaker/StMixerEvent.h"
+#include "StPicoMixedEventMaker/StMixerHists.h"
 #include "StPicoHFMaker/StHFCuts.h"
 #include "StPicoCutsBase/StPicoCutsBase.h"
-#include "StMixerPair.h"
+#include "StPicoMixedEventMaker/StMixerPair.h"
 
 
 using namespace std;
