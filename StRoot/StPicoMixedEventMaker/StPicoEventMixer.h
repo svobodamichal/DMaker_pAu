@@ -63,13 +63,13 @@ class StPicoEventMixer {
   bool isMixerPion(StMixerTrack const&);
   bool isMixerKaon(StMixerTrack const&);
   bool isMixerProton(StMixerTrack const&);
-  bool isGoodEvent(StPicoDst const * const picoDst);
+/*  bool isGoodEvent(StPicoDst const * const picoDst);
   bool isGoodTrigger(StPicoEvent const * const) const;
   bool isGoodTrack(StPicoTrack const * const trk);
   bool isTpcPion(StPicoTrack const * const);
   bool isTpcKaon(StPicoTrack const * const);
   bool isTpcProton(StPicoTrack const * const);
-  bool isTPCHadron(StPicoTrack const * const, int pidFlag);
+  bool isTPCHadron(StPicoTrack const * const, int pidFlag);*/
   bool isCloseMixerPair(StMixerPair const * pair) const;
 
 

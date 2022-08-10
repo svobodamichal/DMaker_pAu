@@ -310,7 +310,7 @@ bool StPicoEventMixer::isMixerProton(StMixerTrack const& track) {
     return true;
 }
 //-----------------------------------------------------------
-bool StPicoEventMixer::isGoodEvent(StPicoDst const * const picoDst)
+/*bool StPicoEventMixer::isGoodEvent(StPicoDst const * const picoDst)
 {
     return (mHFCuts->isGoodEvent(picoDst));
 }
@@ -346,6 +346,7 @@ bool StPicoEventMixer::isGoodTrigger(StPicoEvent const * const mPicoEvent) const
 {
     return mHFCuts->isGoodTrigger(mPicoEvent);
 }
+ */
 //-----------------------------------------------------------
 bool StPicoEventMixer::isCloseMixerPair(StMixerPair const * pair) const {
     return ( std::cos(pair->pointingAngle()) > mHFCuts->cutSecondaryPairCosThetaMin() &&
