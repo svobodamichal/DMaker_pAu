@@ -104,6 +104,8 @@ bool StPicoEventMixer::addPicoEvent(StPicoDst const* const picoDst, float weight
         cout << "Předposlední if: Filled buffer je " << filledBuffer << " a Event Buffer" << mEventsBuffer <<endl;
 
     }
+    mEventsBuffer=10;
+    filledBuffer=12;
     cout << "Tady jsem"<<endl;
     cout << "Event Buffer je " << mEventsBuffer <<endl;
     cout << "Filled buffer je " << filledBuffer <<endl;
