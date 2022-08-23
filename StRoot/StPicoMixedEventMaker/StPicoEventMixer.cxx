@@ -106,11 +106,8 @@ bool StPicoEventMixer::addPicoEvent(StPicoDst const* const picoDst, float weight
         cout << "Předposlední if: Filled buffer je " << filledBuffer << " a Event Buffer" << mEventsBuffer <<endl;
 
     }
-    dca1 = 12.5;
-    cout<<"Random variable  " <<dca1<<endl;
 
-
-    mEventsBuffer=10;
+    int mEventsBuffer=10;
     filledBuffer=12;
     cout << "Tady jsem"<<endl;
     cout << "Event Buffer je " << mEventsBuffer <<endl;
@@ -314,8 +311,6 @@ bool StPicoEventMixer::isMixerProton(StMixerTrack const& track) {
 {
     return (mHFCuts->isGoodEvent(picoDst));
 }
-
-
 //-----------------------------------------------------------
 bool StPicoEventMixer::isTpcPion(StPicoTrack const * const trk)
 {
