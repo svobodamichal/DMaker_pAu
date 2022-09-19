@@ -90,9 +90,9 @@ void runPicoMixedEventLocal(
   Int_t nEvents = picoDstMaker->chain()->GetEntries();
   cout << "Total entries = " << nEvents << endl;
 
-  for (Int_t i=0; i<nEvents; ++i) {
-//    if(i%10==0)       cout << "Working on eventNumber " << i << endl;
-//    cout << "Working on eventNumber " << i << endl;
+  for (Int_t i=0; i<nEvents; i++) {
+    if(i%10==0)  cout << "Working on eventNumber " << i << endl;
+
     chain->Clear();
     int iret = chain->Make(i);
     if (iret) { cout << "Bad return code!" << iret << endl; break;}
