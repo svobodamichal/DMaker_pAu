@@ -57,59 +57,41 @@ void StPicoEventMixer::finish() {
 //-----------------------------------------------------------
 bool StPicoEventMixer::addPicoEvent(StPicoDst const* const picoDst, float weight) {
 
-    if (!mHFCuts){
-        cout<< "Nejsou mHFCuts (addPico)"<<endl;
-        }
     unsigned int nTracks = picoDst->numberOfTracks();
     TVector3 pVertex = picoDst->event()->primaryVertex();
     StMixerEvent* event = new StMixerEvent(pVertex, picoDst->event()->bField());
     event->addPicoEvent(*(picoDst->event()));
 
 
-    cout << "Testík 5" <<endl;
 
     for(unsigned int iTrk = 0; iTrk < nTracks; ++iTrk) {
         StPicoTrack const* trk = picoDst->track(iTrk);
         bool saveTrack = false;
 
-        mEventsBuffer=10;
-        filledBuffer=12;
-        cout << "Tady jsem"<<endl;
-        cout << "Event Buffer je " << mEventsBuffer <<endl;
-        cout << "Filled buffer je " << filledBuffer <<endl;
-
-        cout << "Testík 6" <<endl;
 
         if(mHFCuts->isGoodPion(trk)) {
-            cout << "Testík 6.1" <<endl;
-
             saveTrack = true;
             event->addPion(event->getNoTracks());
 
         }
-        cout << "Testík 7" <<endl;
 
         if(mHFCuts->isGoodKaon(trk)) {
             saveTrack = true;
             event->addKaon(event->getNoTracks());
 //            cout<<mHFCuts->getOneOverBeta(trk, mHFCuts->getTofBetaBase(trk), StPicoCutsBase::kKaon)<<endl;
         }
-        cout << "Testík 8" <<endl;
 
         if(saveTrack){
-            cout << "Test 9"<<endl;
             event->addTrack(*trk);
-            cout << "Test v posledním ifu"<<endl;
-        } cout << "Test za posledním ifem" << endl;
+        }
     }
-    cout <<"Poslední cout"<<endl;
 
-    cout <<"Pocet pionu: "<<event->getNoPions()<<" Pocet kaonu: "<< event->getNoKaons()<<endl;
+//    cout <<"Pocet pionu: "<<event->getNoPions()<<" Pocet kaonu: "<< event->getNoKaons()<<endl;
 
     if ( event->getNoPions() > 0 ||  event->getNoKaons() > 0) {
         mEvents.push_back(event);
         filledBuffer+=1;
-        cout << "Předposlední if: Filled buffer je " << filledBuffer << " a Event Buffer" << mEventsBuffer <<endl;
+//        cout << "Předposlední if: Filled buffer je " << filledBuffer << " a Event Buffer" << mEventsBuffer <<endl;
 
     }
 
@@ -118,28 +100,22 @@ bool StPicoEventMixer::addPicoEvent(StPicoDst const* const picoDst, float weight
 
     //Returns true if need to do mixing, false if buffer has space still
     if ( filledBuffer == mEventsBuffer) {
-        cout << "Poslední if: Filled buffer je " << filledBuffer << " a Event Buffer" << mEventsBuffer <<endl;
-        cout << "True" <<endl;
         return true;
     }
     return false;
 }
 //-----------------------------------------------------------
 void StPicoEventMixer::mixEvents() {
-    cout << "Test mixEvents" <<endl;
 
 
     size_t const nEvent = mEvents.size();
-    cout << "Pocet tracku" <<nEvent<<endl;
 
     int const nTracksEvt1 = mEvents.at(0)->getNoPions();
-    cout << "Pocet pionu" <<nTracksEvt1<<endl;
 
 
     // Go through the event buffer
     for( size_t iEvt2 = 0; iEvt2 < nEvent; ++iEvt2) {
         int const nTracksEvt2 = mEvents.at(iEvt2)->getNoKaons();
-        cout << "Pocet kaonu" <<nTracksEvt2<<endl;
 
         // evts trk loops
         for(int iTrk1 = 0; iTrk1 < nTracksEvt1; ++iTrk1) { //pions
@@ -164,13 +140,15 @@ void StPicoEventMixer::mixEvents() {
                 if (!isCloseMixerPair(pair)) continue;
 
                 int ii=0;
-                float ntVar[21];
+                float ntVar[23];
                 ntVar[ii++] = pion.gPt();
+                ntVar[ii++] = pion.gPtot();
                 ntVar[ii++] = pair->particle1Dca();
                 ntVar[ii++] = pion.nSigmaPion();
                 ntVar[ii++] = pion.nHitsFit();
                 ntVar[ii++] = mHFCuts->getOneOverBeta(&pion, mHFCuts->getTofBetaBase(&pion), StPicoCutsBase::kPion); //probably not working now, you are in weong event, so calc. for TOF traits is not right
                 ntVar[ii++] = kaon.gPt();
+                ntVar[ii++] = kaon.gPtot();
                 ntVar[ii++] = pair->particle2Dca();
                 ntVar[ii++] = kaon.nSigmaKaon();
                 ntVar[ii++] = kaon.nHitsFit();

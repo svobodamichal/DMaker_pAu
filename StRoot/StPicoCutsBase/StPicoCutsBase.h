@@ -69,6 +69,8 @@ public:
     //    use for
     //      - primary hadrons
     //      - secondarys from charm decays (as an approximation)
+
+
     bool isTOFmatched(StPicoTrack const *trk) const;
     bool isTOFPion(StPicoTrack const *trk) const;
     bool isTOFKaon(StPicoTrack const *trk) const;
@@ -77,6 +79,11 @@ public:
     bool isTOFPion(StPicoTrack const *trk,   float const & tofBeta) const;
     bool isTOFKaon(StPicoTrack const *trk,   float const & tofBeta) const;
     bool isTOFProton(StPicoTrack const *trk, float const & tofBeta) const;
+
+    bool isBEMCmatched(StPicoTrack const *trk) const;
+
+    bool isPionTPC(StPicoTrack const *trk) const;
+    bool isKaonTPC(StPicoTrack const *trk) const;
 
     // -- Is TOF particle in ptot range
     //    if track has no TOF information - return true
@@ -170,8 +177,15 @@ public:
     void setCutProtonPtotRangeHybridTOF(float min, float max);
 
     void setHybridTof(bool t);
+    void setHybridTofKaon(bool t);
+    void setHybridTofPion(bool t);
 
     void setHybridTofBetterBetaCuts(bool t);
+    void setHybridTofBetterBetaCutsKaon(bool t);
+    void setHybridTofBetterBetaCutsPion(bool t);
+
+    void setHybridTofWithBEMC(bool t);
+
 
     float tofPathLength(const TVector3* beginPoint, const TVector3* endPoint, float curvature) const;
 
@@ -225,7 +239,12 @@ private:
     float mPrimaryDCAtoVtxMax;         // used for primary selection for TOF Beta recalculation
     float mPtMin;
     bool  mHybridTof;
+    bool  mHybridTofKaon;
+    bool  mHybridTofPion;
     bool  mHybridTofBetterBetaCuts;
+    bool  mHybridTofBetterBetaCutsKaon;
+    bool  mHybridTofBetterBetaCutsPion;
+    bool  mHybridTofWithBEMC;
     bool  mOnlyHotSpot;
 
 
@@ -307,7 +326,13 @@ inline void StPicoCutsBase::setCutProtonPtotRangeTOF(float min, float max)      
 inline void StPicoCutsBase::setCutProtonPtotRangeHybridTOF(float min, float max) { setCutPtotRangeHybridTOF(min, max, StPicoCutsBase::kProton); }
 
 inline void StPicoCutsBase::setHybridTof(bool t) {mHybridTof = t;}
+inline void StPicoCutsBase::setHybridTofKaon(bool t) {mHybridTofKaon = t;}
+inline void StPicoCutsBase::setHybridTofPion(bool t) {mHybridTofPion = t;}
 inline void StPicoCutsBase::setHybridTofBetterBetaCuts(bool t) {mHybridTofBetterBetaCuts = t;}
+inline void StPicoCutsBase::setHybridTofBetterBetaCutsKaon(bool t) {mHybridTofBetterBetaCutsKaon = t;}
+inline void StPicoCutsBase::setHybridTofBetterBetaCutsPion(bool t) {mHybridTofBetterBetaCutsPion = t;}
+
+inline void StPicoCutsBase::setHybridTofWithBEMC(bool t) {mHybridTofWithBEMC = t;}
 
 
 
